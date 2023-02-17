@@ -1,0 +1,27 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "battleship board game built with javascript and tested with jest",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supersakana/battleship.git"
+  },
+  "author": "Zac Williamson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supersakana/battleship/issues"
+  },
+  "homepage": "https://github.com/supersakana/battleship#readme",
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
