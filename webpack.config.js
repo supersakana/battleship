@@ -9,7 +9,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Battleship',
-      template: './src/index.html',
+      template: './dist/index.html',
+    //   template: './src/template.html', => is the correct template, using ./dist/index.html temporarily 
       minify: { collapseWhitespace: false }
     }),
   ],
@@ -20,11 +21,27 @@ module.exports = {
     clean: true,
   },
 
+  optimization: {
+    runtimeChunk: 'single',
+  },
+
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
+    port: 3000,
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
+  },
+
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        include: path.resolve(__dirname, 'src'),
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },

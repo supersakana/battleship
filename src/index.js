@@ -1,20 +1,9 @@
 import _ from 'lodash';
 import './style.css';
-import printMe from './js/print';
+import start from './js/game';
 
 function component() {
-    const element = document.createElement('div');
-    const btn = document.createElement('button');
-  
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    element.classList.add('hello');
-
-    btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = printMe;
-
-    element.appendChild(btn);
-  
-    return element;
+  start()
   }
-  
-  document.body.appendChild(component());
+
+component()
