@@ -1,9 +1,8 @@
-import _ from 'lodash';
 import './style.css';
 import start from './js/game';
 
 function component() {
-  start()
-  }
+  start();
+}
 
-component()
+component();
