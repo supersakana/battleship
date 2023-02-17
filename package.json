@@ -4,7 +4,7 @@
   "description": "battleship board game built with javascript and tested with jest",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "watch": "webpack --watch",
     "build": "webpack",
     "dev": "webpack serve"
@@ -20,11 +20,13 @@
   },
   "homepage": "https://github.com/supersakana/battleship#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
     "css-loader": "^6.7.3",
     "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.4.3",
     "postcss": "^8.4.21",
     "postcss-loader": "^7.0.2",
     "postcss-preset-env": "^8.0.1",
