@@ -10,8 +10,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Battleship',
       template: './dist/index.html',
-    //   template: './src/template.html', => is the correct template, using ./dist/index.html temporarily 
-      minify: { collapseWhitespace: false }
+      //   template: './src/template.html', => is the correct template
+      minify: { collapseWhitespace: false },
     }),
   ],
 

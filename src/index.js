@@ -1,5 +1,5 @@
 import './style.css';
-import start from './js/game';
+import { start } from './js/game';
 
 function component() {
   start();
