@@ -4,7 +4,7 @@
 
 export default class Board {
   constructor() {
-    this.cells = this.#generateCells();
+    this.at = this.#generateCells();
   }
 
   placeShip(ship, cell) {
@@ -17,26 +17,37 @@ export default class Board {
     }
   }
 
+  receiveAttack(cell) {
+    const target = this.at[cell];
+
+    if (target.ship != null) {
+      target.ship.hit();
+    }
+    target.hit = true;
+  }
+
   //   private
 
   #generateCells() {
     const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const coords = {};
+    const cells = {};
     nums.forEach((x) => {
-      nums.forEach((y) => { coords[`${x}${y}`] = null; });
+      nums.forEach((y) => {
+        cells[`${x}${y}`] = { ship: null, hit: false };
+      });
     });
-    return coords;
+    return cells;
   }
 
   #axisY(ship, coord) {
     for (let y = coord[1]; y < (ship.length + coord[1]); y++) {
-      this.cells[`${coord[0]}${y}`] = ship;
+      this.at[`${coord[0]}${y}`].ship = ship;
     }
   }
 
   #axisX(ship, coord) {
     for (let x = coord[0]; x < (ship.length + coord[0]); x++) {
-      this.cells[`${x}${coord[1]}`] = ship;
+      this.at[`${x}${coord[1]}`].ship = ship;
     }
   }
 }
