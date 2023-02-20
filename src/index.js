@@ -1,8 +1,5 @@
 import './style.css';
-import { start } from './js/game';
+import Game from './js/game';
 
-function component() {
-  start();
-}
-
-component();
+const game = new Game();
+game.start();
