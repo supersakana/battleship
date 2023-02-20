@@ -1,7 +1,7 @@
-import { testFunction } from '../src/js/game';
-
+import Game from '../src/js/game';
 /* eslint-disable */
-test('it returns 100', () => {
-  expect(testFunction()).toEqual('the test is working!');
+test('it returns message', () => {
+  const game = new Game();
+  expect(game.testFunction()).toEqual('the test is working!');
 });
 /* eslint-enable */

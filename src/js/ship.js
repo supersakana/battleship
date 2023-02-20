@@ -3,4 +3,12 @@ export default class Ship {
     this.length = length;
     this.hits = 0;
   }
+
+  hit() {
+    this.hits += 1;
+  }
+
+  isSunk() {
+    return this.length === this.hits;
+  }
 }
