@@ -1,5 +1,5 @@
 import './style.css';
-import Game from './js/game';
+import Game from './lib/game';
 
 const game = new Game();
 game.start();
