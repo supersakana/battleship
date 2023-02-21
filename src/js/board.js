@@ -27,7 +27,7 @@ export default class Board {
   }
 
   noMoreShips() {
-    const shipCells = Object.values(this.at).filter((v) => v.ship != null && v.hit === false);
+    const shipCells = Object.values(this.at).filter(this.#isOpenTarget);
     return shipCells.length === 0;
   }
 
@@ -54,5 +54,9 @@ export default class Board {
     for (let x = coord[0]; x < (ship.length + coord[0]); x++) {
       this.at[`${x}${coord[1]}`].ship = ship;
     }
+  }
+
+  #isOpenTarget(cell) {
+    return cell.ship != null && cell.hit === false;
   }
 }

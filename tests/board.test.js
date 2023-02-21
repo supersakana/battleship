@@ -52,7 +52,6 @@ describe('noMoreShips', () => {
     board.receiveAttack('40');
     board.receiveAttack('41');
     board.receiveAttack('42');
-    console.log(board);
 
     expect(board.noMoreShips()).toBeTruthy();
   });
