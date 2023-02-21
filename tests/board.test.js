@@ -1,5 +1,5 @@
-import Board from '../src/js/board';
-import Ship from '../src/js/ship';
+import Board from '../src/lib/board';
+import Ship from '../src/lib/ship';
 
 /* eslint-disable no-undef */
 

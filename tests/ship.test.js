@@ -1,4 +1,4 @@
-import Ship from '../src/js/ship';
+import Ship from '../src/lib/ship';
 
 /* eslint-disable no-undef */
 

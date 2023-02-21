@@ -20,9 +20,8 @@ export default class Board {
   receiveAttack(cell) {
     const target = this.at[cell];
 
-    if (target.ship != null) {
-      target.ship.hit();
-    }
+    if (target.ship != null) target.ship.hit();
+
     target.hit = true;
   }
 
