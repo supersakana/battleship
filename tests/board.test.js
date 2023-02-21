@@ -26,14 +26,14 @@ describe('placeShip', () => {
 });
 
 describe('receiveAttack', () => {
-  test('receiveAttack hits target if no ship', () => {
+  test('hits target if no ship', () => {
     const board = new Board();
     board.receiveAttack('87');
 
     expect(board.at['87'].hit).toEqual(true);
   });
 
-  test('receiveAttack hits target if ship included', () => {
+  test('hits target if ship included', () => {
     const board = new Board();
     const ship = new Ship(3);
     board.placeShip(ship, '40');
@@ -41,5 +41,36 @@ describe('receiveAttack', () => {
 
     expect(board.at['40'].ship.hits).toEqual(1);
     expect(board.at['40'].hit).toEqual(true);
+  });
+});
+
+describe('noMoreShips', () => {
+  test('returns true if there are no more ships', () => {
+    const board = new Board();
+    const ship = new Ship(3);
+    board.placeShip(ship, '40');
+    board.receiveAttack('40');
+    board.receiveAttack('41');
+    board.receiveAttack('42');
+    console.log(board);
+
+    expect(board.noMoreShips()).toBeTruthy();
+  });
+
+  test('returns false if there are still ships', () => {
+    const board = new Board();
+    const ship = new Ship(3);
+    board.placeShip(ship, '40');
+
+    expect(board.noMoreShips()).toBeFalsy();
+  });
+
+  test('returns false if ship is hit but still open', () => {
+    const board = new Board();
+    const ship = new Ship(3);
+    board.placeShip(ship, '40');
+    board.receiveAttack('40');
+
+    expect(board.noMoreShips()).toBeFalsy();
   });
 });

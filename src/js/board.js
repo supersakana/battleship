@@ -26,6 +26,11 @@ export default class Board {
     target.hit = true;
   }
 
+  noMoreShips() {
+    const shipCells = Object.values(this.at).filter((v) => v.ship != null && v.hit === false);
+    return shipCells.length === 0;
+  }
+
   //   private
 
   #generateCells() {
