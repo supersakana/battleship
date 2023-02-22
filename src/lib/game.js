@@ -10,7 +10,8 @@ export default class Game {
 
   start() {
     this.setup();// set up players and gameboards
-    displayBoard(this.players[1].board);
+    displayBoard(this.players[0].board, 'human');
+    displayBoard(this.players[1].board, 'cpu');
   }
 
   setup() {

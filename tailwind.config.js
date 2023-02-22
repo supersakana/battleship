@@ -4,7 +4,11 @@ module.exports = {
     './src/lib/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Poppins: ['Poppins', 'sans-serif'],
+      },
+    },
   },
   variants: {
     extend: {},
