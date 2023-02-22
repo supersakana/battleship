@@ -6,8 +6,13 @@
     <script defer="defer" src="main.bundle.js"></script>
   </head>
 
-  <body>
-    <h1 id="title">Battleship</h1>
-    <div id="content"></div>
+  <body class="h-full w-full bg-gray-200">
+    <div class="flex justify-center items-center h-[10vh]">
+      <h1 id="title" class="text-5xl text-center">Battleship</h1>
+    </div>
+
+    <div class="flex justify-center items-center mx-1 h-full md:h-[85vh]">
+      <div id="board" class="w-[60vh] h-[60vh] md:w-[80vh] md:h-[80vh] grid grid-cols-10 gap-1"></div>
+    </div>
   </body>
 </html>

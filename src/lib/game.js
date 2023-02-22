@@ -1,4 +1,5 @@
 import Player from './player';
+import { displayBoard } from './dom';
 
 /* eslint-disable class-methods-use-this */
 
@@ -9,7 +10,7 @@ export default class Game {
 
   start() {
     this.setup();// set up players and gameboards
-    console.log(this.players);
+    displayBoard(this.players[1].board);
   }
 
   setup() {
