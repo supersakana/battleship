@@ -17,7 +17,10 @@ export default class Game {
     const cpu = new Player(true);
     this.players.push(human, cpu);
 
-    displayBoard(human.board, '#human');
-    displayBoard(cpu.board, '#cpu');
+    displayBoard(human.board, 'human');
+    displayBoard(cpu.board, 'cpu');
+
+    human.randomize();
+    console.log(human.board);
   }
 }

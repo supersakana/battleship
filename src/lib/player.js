@@ -2,6 +2,7 @@ import Board from './board';
 import Ship from './ship';
 
 /* eslint-disable class-methods-use-this */
+/* eslint-disable no-param-reassign */
 
 export default class Player {
   constructor(isCpu = false) {
@@ -11,16 +12,23 @@ export default class Player {
   }
 
   randomize() {
-
+    const direction = this.#randomDirection();
+    this.ships.forEach((ship) => {
+      ship.isVerti = direction;
+      this.board.placeShip(ship, '01');
+    });
   }
 
-  #createShips() {
-    const lengths = [5, 4, 3, 3, 2];
-    const ships = [];
+  #createShips(ships = []) {
+    const lengths = [5];
 
     lengths.forEach((num) => {
       ships.push(new Ship(num));
     });
     return ships;
+  }
+
+  #randomDirection() {
+    return [true, false][Math.floor(((Math.random()) * 2))];
   }
 }

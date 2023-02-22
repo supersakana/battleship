@@ -6,7 +6,7 @@ import Ship from '../src/lib/ship';
 describe('placeShip', () => {
   test('places a verticle ship 3 cells length', () => {
     const board = new Board();
-    const ship = { length: 3, isVerti: true };
+    const ship = { length: 3, isVerti: false };
     board.placeShip(ship, '34');
 
     expect(board.at['34'].ship).toEqual(ship);
@@ -16,7 +16,7 @@ describe('placeShip', () => {
 
   test('places a horizontal ship 3 cells length', () => {
     const board = new Board();
-    const ship = { length: 3, isVerti: false };
+    const ship = { length: 3, isVerti: true };
     board.placeShip(ship, '57');
 
     expect(board.at['57'].ship).toEqual(ship);
@@ -50,8 +50,8 @@ describe('noMoreShips', () => {
     const ship = new Ship(3);
     board.placeShip(ship, '40');
     board.receiveAttack('40');
-    board.receiveAttack('41');
-    board.receiveAttack('42');
+    board.receiveAttack('50');
+    board.receiveAttack('60');
 
     expect(board.noMoreShips()).toBeTruthy();
   });

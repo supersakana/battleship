@@ -1,3 +1,5 @@
+import { displayShip } from './dom';
+
 /* eslint-disable no-plusplus */
 /* eslint-disable radix */
 /* eslint-disable class-methods-use-this */
@@ -43,15 +45,19 @@ export default class Board {
     return cells;
   }
 
-  #axisY(ship, coord) {
+  #axisX(ship, coord) {
     for (let y = coord[1]; y < (ship.length + coord[1]); y++) {
-      this.at[`${coord[0]}${y}`].ship = ship;
+      const cell = `${coord[0]}${y}`;
+      this.at[cell].ship = ship;
+      displayShip(cell);
     }
   }
 
-  #axisX(ship, coord) {
+  #axisY(ship, coord) {
     for (let x = coord[0]; x < (ship.length + coord[0]); x++) {
-      this.at[`${x}${coord[1]}`].ship = ship;
+      const cell = `${x}${coord[1]}`;
+      this.at[cell].ship = ship;
+      displayShip(cell);
     }
   }
 
