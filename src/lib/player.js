@@ -1,5 +1,6 @@
 import Board from './board';
 import Ship from './ship';
+import { displayShip } from './dom';
 
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-param-reassign */
@@ -15,7 +16,7 @@ export default class Player {
     const direction = this.#randomDirection();
     this.ships.forEach((ship) => {
       ship.isVerti = direction;
-      this.board.placeShip(ship, '01');
+      this.board.placeShip(ship, '01', displayShip);
     });
   }
 

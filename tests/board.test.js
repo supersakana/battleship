@@ -7,7 +7,8 @@ describe('placeShip', () => {
   test('places a verticle ship 3 cells length', () => {
     const board = new Board();
     const ship = { length: 3, isVerti: false };
-    board.placeShip(ship, '34');
+    const mockDisplay = jest.fn();
+    board.placeShip(ship, '34', mockDisplay);
 
     expect(board.at['34'].ship).toEqual(ship);
     expect(board.at['35'].ship).toEqual(ship);
@@ -17,7 +18,8 @@ describe('placeShip', () => {
   test('places a horizontal ship 3 cells length', () => {
     const board = new Board();
     const ship = { length: 3, isVerti: true };
-    board.placeShip(ship, '57');
+    const mockDisplay = jest.fn();
+    board.placeShip(ship, '57', mockDisplay);
 
     expect(board.at['57'].ship).toEqual(ship);
     expect(board.at['67'].ship).toEqual(ship);
@@ -36,7 +38,8 @@ describe('receiveAttack', () => {
   test('hits target if ship included', () => {
     const board = new Board();
     const ship = new Ship(3);
-    board.placeShip(ship, '40');
+    const mockDisplay = jest.fn();
+    board.placeShip(ship, '40', mockDisplay);
     board.receiveAttack('40');
 
     expect(board.at['40'].ship.hits).toEqual(1);
@@ -48,7 +51,8 @@ describe('noMoreShips', () => {
   test('returns true if there are no more ships', () => {
     const board = new Board();
     const ship = new Ship(3);
-    board.placeShip(ship, '40');
+    const mockDisplay = jest.fn();
+    board.placeShip(ship, '40', mockDisplay);
     board.receiveAttack('40');
     board.receiveAttack('50');
     board.receiveAttack('60');
@@ -59,7 +63,8 @@ describe('noMoreShips', () => {
   test('returns false if there are still ships', () => {
     const board = new Board();
     const ship = new Ship(3);
-    board.placeShip(ship, '40');
+    const mockDisplay = jest.fn();
+    board.placeShip(ship, '40', mockDisplay);
 
     expect(board.noMoreShips()).toBeFalsy();
   });
@@ -67,7 +72,8 @@ describe('noMoreShips', () => {
   test('returns false if ship is hit but still open', () => {
     const board = new Board();
     const ship = new Ship(3);
-    board.placeShip(ship, '40');
+    const mockDisplay = jest.fn();
+    board.placeShip(ship, '40', mockDisplay);
     board.receiveAttack('40');
 
     expect(board.noMoreShips()).toBeFalsy();
