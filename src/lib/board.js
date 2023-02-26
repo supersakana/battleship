@@ -1,3 +1,5 @@
+import { displayShip } from './dom';
+
 /* eslint-disable no-plusplus */
 /* eslint-disable radix */
 /* eslint-disable class-methods-use-this */
@@ -7,7 +9,7 @@ export default class Board {
     this.at = this.#generateCells();
   }
 
-  placeShip(ship, cell, display) {
+  placeShip(ship, cell, display = displayShip) {
     const coord = cell.split('').map((c) => parseInt(c));
 
     if (ship.isVerti) {
