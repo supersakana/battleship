@@ -187,6 +187,6 @@ describe('randomCoord', () => {
       '99',
     ];
 
-    expect(board.randomCoord()).toEqual(result);
+    expect(board.randomCoord(ship)).toEqual(result);
   });
 });

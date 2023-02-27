@@ -32,27 +32,29 @@ export default class Board {
     return shipCells.length === 0;
   }
 
-  randomCoord() {
+  randomCoord(ship) {
     const vaccantCells = Object.keys(this.at).sort().filter((cell) => this.at[cell].ship == null);
     const validCells = [];
     vaccantCells.forEach((cell) => {
-      const combo = this.combo(cell); // Ship { length: 3, isVerti: true} => Cell 50 => [50, 60, 70]
+      const combo = this.combo([cell], ship); // [50, 60, 70]
       // if [50, 60, 70] are ALL within game board && [50, 60, 70] are ALL vaccan cells
-      if (isValid(combo)) {
-        // validPlacement.push(cell)
-        validCells.push(cell);
-      }
+      // if (isValid(combo)) {
+      //   // validPlacement.push(cell)
+      //   validCells.push(cell);
+      // }
+      validCells.push(combo);
     });
     // return validPlacement after iterations
-    console.log(this.at);
+    console.log(validCells);
     return vaccantCells;
   }
 
-  combo(cell, ship) {
+  combo(combo, ship) {
     const axis = ship.isVerti ? 10 : 1;
-    const combo = [cell];
     for (let i = 0; i < (ship.length - 1); i++) {
-      combo.push(combo[combo.length - 1] + axis);
+      let coord = `${parseInt(combo[combo.length - 1]) + axis}`;
+      if (coord.length < 2) coord = `0${coord}`;
+      combo.push(coord);
     }
     return combo;
   }
