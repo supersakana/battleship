@@ -32,6 +32,12 @@ export default class Board {
     return shipCells.length === 0;
   }
 
+  randomCoord() {
+    const vaccantCells = Object.keys(this.at).sort().filter((cell) => this.at[cell].ship == null);
+    console.log(this.at);
+    return vaccantCells;
+  }
+
   //   private
 
   #generateCells() {
