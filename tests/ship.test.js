@@ -25,10 +25,42 @@ describe('isSunk', () => {
 });
 
 describe('combo', () => {
+  test('returns [01, 10, 20], vertical ship, length of 3, 01 coord', () => {
+    const ship = new Ship(3);
+    const result = ship.combo(['01']);
+    expect(result).toEqual(['01', '11', '21']);
+  });
+
   test('returns [01, 02, 03], horizontal ship, length of 3, 01 coord', () => {
     const ship = new Ship(3);
     ship.isVerti = false;
     const result = ship.combo(['01']);
     expect(result).toEqual(['01', '02', '03']);
+  });
+
+  test('returns combo outside of board proximity (vertical)', () => {
+    const ship = new Ship(3);
+    const result = ship.combo(['99']);
+    expect(result).toEqual(['99', '109', '119']);
+  });
+
+  test('returns combo outside of board proximity (horizontal)', () => {
+    const ship = new Ship(3);
+    ship.isVerti = false;
+    const result = ship.combo(['99']);
+    expect(result).toEqual(['99', '100', '101']);
+  });
+
+  test('returns [30, 40, 50, 60, 70], vertical ship, length of 5, 30 coord', () => {
+    const ship = new Ship(5);
+    const result = ship.combo(['30']);
+    expect(result).toEqual(['30', '40', '50', '60', '70']);
+  });
+
+  test('returns [30, 40, 50, 60, 70], vertical ship, length of 5, 30 coord', () => {
+    const ship = new Ship(5);
+    ship.isVerti = false;
+    const result = ship.combo(['30']);
+    expect(result).toEqual(['30', '31', '32', '33', '34']);
   });
 });
