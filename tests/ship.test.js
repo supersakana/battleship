@@ -23,3 +23,12 @@ describe('isSunk', () => {
     expect(ship.isSunk()).toBeFalsy();
   });
 });
+
+describe('combo', () => {
+  test('returns [01, 02, 03], horizontal ship, length of 3, 01 coord', () => {
+    const ship = new Ship(3);
+    ship.isVerti = false;
+    const result = ship.combo(['01']);
+    expect(result).toEqual(['01', '02', '03']);
+  });
+});
