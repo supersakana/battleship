@@ -18,7 +18,7 @@ export default class Ship {
   }
 
   combo(combo) {
-    const axis = this.isVerti ? 10 : 1;
+    const axis = this.isVerti ? 1 : 10;
     for (let i = 0; i < (this.length - 1); i++) {
       let coord = `${parseInt(combo[combo.length - 1]) + axis}`;
 

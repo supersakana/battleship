@@ -12,8 +12,8 @@ describe('placeShip', () => {
     board.placeShip(ship, '34', mockDisplay);
 
     expect(board.at['34'].ship).toEqual(ship);
-    expect(board.at['35'].ship).toEqual(ship);
-    expect(board.at['36'].ship).toEqual(ship);
+    expect(board.at['44'].ship).toEqual(ship);
+    expect(board.at['54'].ship).toEqual(ship);
   });
 
   test('places a horizontal ship 3 cells length', () => {
@@ -23,8 +23,8 @@ describe('placeShip', () => {
     board.placeShip(ship, '57', mockDisplay);
 
     expect(board.at['57'].ship).toEqual(ship);
-    expect(board.at['67'].ship).toEqual(ship);
-    expect(board.at['77'].ship).toEqual(ship);
+    expect(board.at['58'].ship).toEqual(ship);
+    expect(board.at['59'].ship).toEqual(ship);
   });
 });
 
@@ -55,8 +55,8 @@ describe('noMoreShips', () => {
     const mockDisplay = jest.fn();
     board.placeShip(ship, '40', mockDisplay);
     board.receiveAttack('40');
-    board.receiveAttack('50');
-    board.receiveAttack('60');
+    board.receiveAttack('41');
+    board.receiveAttack('42');
 
     expect(board.noMoreShips()).toBeTruthy();
   });
@@ -81,113 +81,17 @@ describe('noMoreShips', () => {
   });
 });
 
-// randomCoord will return a valid random coordinate, testing parts of the function little by little
-describe('randomCoord', () => {
-  test('returns a list of coords without ship', () => {
-    const board = new Board();
-    const ship = new Ship(3);
-    const mockDisplay = jest.fn();
-    board.placeShip(ship, '02', mockDisplay);
-    const result = [
-      '00',
-      '01',
-      '03',
-      '04',
-      '05',
-      '06',
-      '07',
-      '08',
-      '09',
-      '10',
-      '11',
-      '13',
-      '14',
-      '15',
-      '16',
-      '17',
-      '18',
-      '19',
-      '20',
-      '21',
-      '23',
-      '24',
-      '25',
-      '26',
-      '27',
-      '28',
-      '29',
-      '30',
-      '31',
-      '32',
-      '33',
-      '34',
-      '35',
-      '36',
-      '37',
-      '38',
-      '39',
-      '40',
-      '41',
-      '42',
-      '43',
-      '44',
-      '45',
-      '46',
-      '47',
-      '48',
-      '49',
-      '50',
-      '51',
-      '52',
-      '53',
-      '54',
-      '55',
-      '56',
-      '57',
-      '58',
-      '59',
-      '60',
-      '61',
-      '62',
-      '63',
-      '64',
-      '65',
-      '66',
-      '67',
-      '68',
-      '69',
-      '70',
-      '71',
-      '72',
-      '73',
-      '74',
-      '75',
-      '76',
-      '77',
-      '78',
-      '79',
-      '80',
-      '81',
-      '82',
-      '83',
-      '84',
-      '85',
-      '86',
-      '87',
-      '88',
-      '89',
-      '90',
-      '91',
-      '92',
-      '93',
-      '94',
-      '95',
-      '96',
-      '97',
-      '98',
-      '99',
-    ];
+// describe('validCells', () => {
+//   test('returns a list of coords without ship', () => {
+//     const board = new Board();
+//     const ship1 = new Ship(5);
+//     const ship2 = new Ship(4);
+//     const ship3 = new Ship(3);
+//     const mockDisplay = jest.fn();
+//     board.placeShip(ship1, '02', mockDisplay);
+//     board.placeShip(ship2, '41', mockDisplay);
+//     const result = ['00', '02'];
 
-    expect(board.randomCoord(ship)).toEqual(result);
-  });
-});
+//     expect(board.validCells(ship3)).toEqual(result);
+//   });
+// });

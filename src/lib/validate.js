@@ -2,9 +2,10 @@ function isWithinBoard(coord) {
   return coord >= 0 && coord <= 99;
 }
 
-function isSameY(coord, ship, yAxis) {
-  if (ship.isVerti) return coord[0] === yAxis;
-
+function isSameX(coord, ship, xAxis) {
+  if (ship.isVerti) {
+    return coord[0] === xAxis;
+  }
   return true;
 }
 
@@ -15,11 +16,14 @@ function isVaccant(coord, board) {
 // public
 
 function isValid(combo, ship, board) {
-  const yAxis = combo[0][1];
+  const xAxis = combo[0][0];
 
-  return combo.every((coord) => isWithinBoard(coord)
+  const res = combo.every((coord) => isWithinBoard(coord)
                              && isVaccant(coord, board)
-                             && isSameY(coord, ship, yAxis));
+                             && isSameX(coord, ship, xAxis));
+
+  console.log(`${combo} -> isValid = ${res} -> ${xAxis} -> isVerti ${ship.isVerti}`);
+  return res;
 }
 
 export { isValid }; // eslint-disable-line

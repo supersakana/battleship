@@ -30,7 +30,7 @@ export default class Board {
     return shipCells.length === 0;
   }
 
-  randomCoord(ship) {
+  validCells(ship) {
     const vaccantCells = Object.keys(this.at).sort().filter((cell) => this.at[cell].ship == null);
     const validCells = [];
 
@@ -39,10 +39,9 @@ export default class Board {
       if (isValid(combo, ship, this)) {
         validCells.push(cell);
       }
-      validCells.push(combo);
     });
-    // return validPlacement after iterations
-    return vaccantCells;
+    console.log(validCells);
+    return validCells;
   }
 
   //   private

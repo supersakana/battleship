@@ -16,11 +16,10 @@ describe('isValid', () => {
     const board = new Board();
     const combo = ['24', '34', '44'];
     const ship = { isVerti: false };
-    expect(ship.isVerti).toBeFalsy();
     expect(isValid(combo, ship, board)).toBeTruthy();
   });
 
-  test('false for combos that have different y value', () => {
+  test('false for combos that have different x value', () => {
     const board = new Board();
     const combo = ['28', '29', '30'];
     const ship = { isVerti: true };
