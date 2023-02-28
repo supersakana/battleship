@@ -12,9 +12,8 @@ export default class Player {
   }
 
   randomize() {
-    const direction = this.#randomDirection();
     this.ships.forEach((ship) => {
-      ship.isVerti = direction;
+      ship.isVerti = this.#randomDirection();
       const coords = this.board.validCells(ship);
       const coord = coords[Math.floor(((Math.random()) * coords.length))];
       this.board.placeShip(ship, coord);
@@ -22,7 +21,7 @@ export default class Player {
   }
 
   #createShips(ships = []) {
-    const lengths = [5];
+    const lengths = [5, 4, 3, 3, 2];
 
     lengths.forEach((num) => {
       ships.push(new Ship(num));
