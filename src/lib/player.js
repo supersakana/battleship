@@ -17,7 +17,6 @@ export default class Player {
       ship.isVerti = direction;
       this.board.placeShip(ship, '20');
       this.board.validCells(ship);
-      console.log(ship.isVerti);
     });
   }
 

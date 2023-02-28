@@ -3,9 +3,8 @@ function isWithinBoard(coord) {
 }
 
 function isSameX(coord, ship, xAxis) {
-  if (ship.isVerti) {
-    return coord[0] === xAxis;
-  }
+  if (ship.isVerti) return coord[0] === xAxis;
+
   return true;
 }
 
@@ -18,12 +17,9 @@ function isVaccant(coord, board) {
 function isValid(combo, ship, board) {
   const xAxis = combo[0][0];
 
-  const res = combo.every((coord) => isWithinBoard(coord)
+  return combo.every((coord) => isWithinBoard(coord)
                              && isVaccant(coord, board)
                              && isSameX(coord, ship, xAxis));
-
-  console.log(`${combo} -> isValid = ${res} -> ${xAxis} -> isVerti ${ship.isVerti}`);
-  return res;
 }
 
 export { isValid }; // eslint-disable-line
