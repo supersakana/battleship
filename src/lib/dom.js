@@ -1,9 +1,16 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-loop-func */
+
 function displayBoard(board, id) {
   let cells = '';
 
-  Object.keys(board.at).sort().forEach((key) => {
-    cells += `<div id="${id}-${key}" class="bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-lg"></div>`;
-  });
+  for (let i = 0; i < 10; i++) {
+    const row = Object.keys(board.at).filter((key) => key[1] == i).sort();
+    row.forEach((cell) => {
+      cells += `<div id="${id}-${cell}" class="bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-lg">${cell}</div>`;
+    });
+  }
   document.querySelector(`#${id}`).innerHTML = cells;
 }
 

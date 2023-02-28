@@ -33,6 +33,7 @@ export default class Board {
   randomCoord(ship) {
     const vaccantCells = Object.keys(this.at).sort().filter((cell) => this.at[cell].ship == null);
     const validCells = [];
+
     vaccantCells.forEach((cell) => {
       const combo = ship.combo([cell]);
       if (isValid(combo)) {
