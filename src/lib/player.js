@@ -15,7 +15,7 @@ export default class Player {
     const direction = this.#randomDirection();
     this.ships.forEach((ship) => {
       ship.isVerti = direction;
-      const coord = this.board.randomCoord(ship); // board.randomCoord() returns random valid coord
+      const coord = this.board.randomCoord(ship); // eslint-disable-line
       this.board.placeShip(ship, '02');
     });
   }

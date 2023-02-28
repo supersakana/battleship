@@ -1,4 +1,5 @@
 import { displayShip } from './dom';
+import { isValid } from './validate';
 
 /* eslint-disable no-plusplus */
 /* eslint-disable radix */
@@ -34,11 +35,9 @@ export default class Board {
     const validCells = [];
     vaccantCells.forEach((cell) => {
       const combo = ship.combo([cell]);
-      // if [50, 60, 70] are ALL within game board && [50, 60, 70] are ALL vaccan cells
-      // if (isValid(combo)) {
-      //   // validPlacement.push(cell)
-      //   validCells.push(cell);
-      // }
+      if (isValid(combo)) {
+        validCells.push(cell);
+      }
       validCells.push(combo);
     });
     // return validPlacement after iterations

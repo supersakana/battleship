@@ -6,7 +6,7 @@ export default class Ship {
   constructor(length) {
     this.length = length;
     this.hits = 0;
-    this.isVerti = true; // true if verticle, false if horizontal
+    this.isVerti = true;
   }
 
   hit() {
@@ -21,7 +21,9 @@ export default class Ship {
     const axis = this.isVerti ? 10 : 1;
     for (let i = 0; i < (this.length - 1); i++) {
       let coord = `${parseInt(combo[combo.length - 1]) + axis}`;
+
       if (coord.length < 2) coord = `0${coord}`;
+
       combo.push(coord);
     }
     return combo;
