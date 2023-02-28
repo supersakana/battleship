@@ -36,7 +36,7 @@ export default class Board {
 
     vaccantCells.forEach((cell) => {
       const combo = ship.combo([cell]);
-      if (isValid(combo)) {
+      if (isValid(combo, ship, this)) {
         validCells.push(cell);
       }
       validCells.push(combo);
