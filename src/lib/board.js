@@ -10,13 +10,10 @@ export default class Board {
   }
 
   placeShip(ship, cell, display = displayShip) {
-    const coord = cell.split('').map((c) => parseInt(c));
-
-    if (ship.isVerti) {
-      this.#axisY(ship, coord, display);
-    } else {
-      this.#axisX(ship, coord, display);
-    }
+    ship.combo([cell]).forEach((xy) => {
+      this.at[xy].ship = ship;
+      display(xy);
+    });
   }
 
   receiveAttack(cell) {
@@ -45,7 +42,6 @@ export default class Board {
       validCells.push(combo);
     });
     // return validPlacement after iterations
-    // console.log(validCells);
     return vaccantCells;
   }
 
@@ -60,22 +56,6 @@ export default class Board {
       });
     });
     return cells;
-  }
-
-  #axisX(ship, coord, display) {
-    for (let y = coord[1]; y < (ship.length + coord[1]); y++) {
-      const cell = `${coord[0]}${y}`;
-      this.at[cell].ship = ship;
-      display(cell);
-    }
-  }
-
-  #axisY(ship, coord, display) {
-    for (let x = coord[0]; x < (ship.length + coord[0]); x++) {
-      const cell = `${x}${coord[1]}`;
-      this.at[cell].ship = ship;
-      display(cell);
-    }
   }
 
   #isOpenTarget(cell) {

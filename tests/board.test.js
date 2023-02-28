@@ -6,7 +6,8 @@ import Ship from '../src/lib/ship';
 describe('placeShip', () => {
   test('places a verticle ship 3 cells length', () => {
     const board = new Board();
-    const ship = { length: 3, isVerti: false };
+    const ship = new Ship(3);
+    ship.isVerti = false;
     const mockDisplay = jest.fn();
     board.placeShip(ship, '34', mockDisplay);
 
@@ -17,7 +18,7 @@ describe('placeShip', () => {
 
   test('places a horizontal ship 3 cells length', () => {
     const board = new Board();
-    const ship = { length: 3, isVerti: true };
+    const ship = new Ship(3);
     const mockDisplay = jest.fn();
     board.placeShip(ship, '57', mockDisplay);
 
