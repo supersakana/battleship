@@ -15,8 +15,9 @@ export default class Player {
     const direction = this.#randomDirection();
     this.ships.forEach((ship) => {
       ship.isVerti = direction;
-      this.board.placeShip(ship, '20');
-      this.board.validCells(ship);
+      const coords = this.board.validCells(ship);
+      const coord = coords[Math.floor(((Math.random()) * coords.length))];
+      this.board.placeShip(ship, coord);
     });
   }
 

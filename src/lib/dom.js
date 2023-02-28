@@ -8,7 +8,7 @@ function displayBoard(board, id) {
   for (let i = 0; i < 10; i++) {
     const row = Object.keys(board.at).filter((key) => key[1] == i).sort();
     row.forEach((cell) => {
-      cells += `<div id="${id}-${cell}" class="bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-lg">${cell}</div>`;
+      cells += `<div id="${id}-${cell}" class="bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-lg"></div>`;
     });
   }
   document.querySelector(`#${id}`).innerHTML = cells;
