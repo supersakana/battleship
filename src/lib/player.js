@@ -11,12 +11,11 @@ export default class Player {
     this.ships = this.#createShips();
   }
 
-  randomize() {
+  randomize(direction = this.#randomDirection(), coord = this.#randomCoord()) {
     const id = this.isCpu ? 'cpu' : 'human';
-    this.ships.forEach((ship) => {
-      ship.isVerti = this.#randomDirection();
-      const coord = this.#randomCoord(ship);
 
+    this.ships.forEach((ship) => {
+      ship.isVerti = direction;
       this.board.placeShip(ship, coord, id);
     });
   }
