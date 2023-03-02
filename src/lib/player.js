@@ -14,8 +14,8 @@ export default class Player {
   randomize() {
     this.ships.forEach((ship) => {
       ship.isVerti = this.#randomDirection();
-      const coords = this.board.validCells(ship);
-      const coord = coords[Math.floor(((Math.random()) * coords.length))];
+      const coord = this.#randomCoord(ship);
+
       this.board.placeShip(ship, coord);
     });
   }
@@ -31,5 +31,10 @@ export default class Player {
 
   #randomDirection() {
     return [true, false][Math.floor(((Math.random()) * 2))];
+  }
+
+  #randomCoord(ship) {
+    const coords = this.board.validCells(ship);
+    return coords[Math.floor(((Math.random()) * coords.length))];
   }
 }
