@@ -15,9 +15,11 @@ function displayBoard(board, id) {
 }
 
 function displayShip(cell, id) {
+  const color = id == 'human' ? 'bg-green-500' : 'bg-rose-500';
   const ship = document.querySelector(`#${id}-${cell}`);
+
   ship.classList.remove('bg-white');
-  ship.classList.add('bg-green-500');
+  ship.classList.add(color);
 }
 
 export { displayBoard, displayShip };
