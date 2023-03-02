@@ -1,4 +1,4 @@
-import { displayShip } from './dom';
+import { displayShip } from './display';
 import { isValid } from './validate';
 
 /* eslint-disable no-plusplus */

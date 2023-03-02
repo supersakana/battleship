@@ -22,6 +22,8 @@ export default class Player {
     });
   }
 
+  // private
+
   #createShips(ships = []) {
     const lengths = [5, 4, 3, 3, 2];
 

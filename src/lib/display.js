@@ -2,16 +2,19 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-loop-func */
 
+import { clickHit } from './events';
+
 function displayBoard(board, id) {
   let cells = '';
 
   for (let i = 0; i < 10; i++) {
     const row = Object.keys(board.at).filter((key) => key[1] == i).sort();
     row.forEach((cell) => {
-      cells += `<div id="${id}-${cell}" class="bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-lg"></div>`;
+      cells += `<div id="${id}-${cell}" class="cell bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-lg"></div>`;
     });
   }
   document.querySelector(`#${id}`).innerHTML = cells;
+  clickHit(board, id);
 }
 
 function displayShip(cell, id) {

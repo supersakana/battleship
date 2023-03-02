@@ -1,5 +1,5 @@
 import Player from './player';
-import { displayBoard } from './dom';
+import { displayBoard } from './display';
 
 /* eslint-disable class-methods-use-this */
 
