@@ -21,5 +21,6 @@ export default class Game {
     displayBoard(cpu.board, 'cpu');
 
     human.randomize();
+    cpu.randomize();
   }
 }

@@ -10,10 +10,10 @@ export default class Board {
     this.at = this.#generateCells();
   }
 
-  placeShip(ship, cell, display = displayShip) {
+  placeShip(ship, cell, id, display = displayShip) {
     ship.combo([cell]).forEach((xy) => {
       this.at[xy].ship = ship;
-      display(xy);
+      display(xy, id);
     });
   }
 

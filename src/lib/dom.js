@@ -14,8 +14,8 @@ function displayBoard(board, id) {
   document.querySelector(`#${id}`).innerHTML = cells;
 }
 
-function displayShip(cell) {
-  const ship = document.querySelector(`#human-${cell}`);
+function displayShip(cell, id) {
+  const ship = document.querySelector(`#${id}-${cell}`);
   ship.classList.remove('bg-white');
   ship.classList.add('bg-green-500');
 }

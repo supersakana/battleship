@@ -12,11 +12,12 @@ export default class Player {
   }
 
   randomize() {
+    const id = this.isCpu ? 'cpu' : 'human';
     this.ships.forEach((ship) => {
       ship.isVerti = this.#randomDirection();
       const coord = this.#randomCoord(ship);
 
-      this.board.placeShip(ship, coord);
+      this.board.placeShip(ship, coord, id);
     });
   }
 

@@ -38,7 +38,7 @@ describe('isValid', () => {
     const placedShip = new Ship(3);
     const ship = { isVerti: false };
     const mockDisplay = jest.fn();
-    board.placeShip(placedShip, '24', mockDisplay);
+    board.placeShip(placedShip, '24', 'human', mockDisplay);
 
     const combo = ['24', '34', '44'];
     expect(isValid(combo, ship, board)).toBeFalsy();

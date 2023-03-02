@@ -9,7 +9,7 @@ describe('placeShip', () => {
     const ship = new Ship(3);
     ship.isVerti = false;
     const mockDisplay = jest.fn();
-    board.placeShip(ship, '34', mockDisplay);
+    board.placeShip(ship, '34', 'human', mockDisplay);
 
     expect(board.at['34'].ship).toEqual(ship);
     expect(board.at['44'].ship).toEqual(ship);
@@ -20,7 +20,7 @@ describe('placeShip', () => {
     const board = new Board();
     const ship = new Ship(3);
     const mockDisplay = jest.fn();
-    board.placeShip(ship, '57', mockDisplay);
+    board.placeShip(ship, '57', 'human', mockDisplay);
 
     expect(board.at['57'].ship).toEqual(ship);
     expect(board.at['58'].ship).toEqual(ship);
@@ -40,7 +40,7 @@ describe('receiveAttack', () => {
     const board = new Board();
     const ship = new Ship(3);
     const mockDisplay = jest.fn();
-    board.placeShip(ship, '40', mockDisplay);
+    board.placeShip(ship, '40', 'human', mockDisplay);
     board.receiveAttack('40');
 
     expect(board.at['40'].ship.hits).toEqual(1);
@@ -53,7 +53,7 @@ describe('noMoreShips', () => {
     const board = new Board();
     const ship = new Ship(3);
     const mockDisplay = jest.fn();
-    board.placeShip(ship, '40', mockDisplay);
+    board.placeShip(ship, '40', 'human', mockDisplay);
     board.receiveAttack('40');
     board.receiveAttack('41');
     board.receiveAttack('42');
@@ -65,7 +65,7 @@ describe('noMoreShips', () => {
     const board = new Board();
     const ship = new Ship(3);
     const mockDisplay = jest.fn();
-    board.placeShip(ship, '40', mockDisplay);
+    board.placeShip(ship, '40', 'human', mockDisplay);
 
     expect(board.noMoreShips()).toBeFalsy();
   });
@@ -74,24 +74,9 @@ describe('noMoreShips', () => {
     const board = new Board();
     const ship = new Ship(3);
     const mockDisplay = jest.fn();
-    board.placeShip(ship, '40', mockDisplay);
+    board.placeShip(ship, '40', 'human', mockDisplay);
     board.receiveAttack('40');
 
     expect(board.noMoreShips()).toBeFalsy();
   });
 });
-
-// describe('validCells', () => {
-//   test('returns a list of coords without ship', () => {
-//     const board = new Board();
-//     const ship1 = new Ship(5);
-//     const ship2 = new Ship(4);
-//     const ship3 = new Ship(3);
-//     const mockDisplay = jest.fn();
-//     board.placeShip(ship1, '02', mockDisplay);
-//     board.placeShip(ship2, '41', mockDisplay);
-//     const result = ['00', '02'];
-
-//     expect(board.validCells(ship3)).toEqual(result);
-//   });
-// });
