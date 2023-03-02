@@ -31,9 +31,7 @@ export default class Board {
   }
 
   validCells(ship) {
-    const vaccantCells = Object.keys(this.at).sort().filter((cell) => this.at[cell].ship == null);
-
-    const validCells = vaccantCells.filter((cell) => {
+    const validCells = this.#vaccantCells().filter((cell) => {
       const combo = ship.combo([cell]);
       return isValid(combo, ship, this);
     });
@@ -55,5 +53,9 @@ export default class Board {
 
   #isOpenTarget(cell) {
     return cell.ship != null && cell.hit === false;
+  }
+
+  #vaccantCells() {
+    return Object.keys(this.at).sort().filter((cell) => this.at[cell].ship == null);
   }
 }
