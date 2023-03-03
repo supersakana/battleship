@@ -25,8 +25,10 @@ function displayShip(cell, id) {
   ship.classList.add(color);
 }
 
-function displayHit(id) {
-  document.querySelector(`#${id}`).classList.add('bg-gray-500');
+function displayHit(id, target) {
+  const color = target.ship != null ? 'bg-gray-400' : 'bg-gray-600';
+  const cell = document.querySelector(`#${id}`);
+  cell.classList.add(color);
 }
 
 function displayHitShip(id) {

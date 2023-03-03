@@ -20,10 +20,10 @@ export default class Board {
   receiveAttack(cell, id, display = displayHit) {
     const target = this.at[cell];
 
-    if (target.ship != null) target.ship.hit(`${id}-${cell}`);
+    if (target.ship != null) target.ship.hit();
 
     target.hit = true;
-    display(`${id}-${cell}`);
+    display(`${id}-${cell}`, target);
   }
 
   noMoreShips() {
