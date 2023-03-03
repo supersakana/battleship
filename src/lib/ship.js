@@ -1,3 +1,5 @@
+import { displayHitShip } from './display';
+
 /* eslint-disable no-plusplus */
 /* eslint-disable radix */
 /* eslint-disable class-methods-use-this */
@@ -9,8 +11,9 @@ export default class Ship {
     this.isVerti = true;
   }
 
-  hit() {
+  hit(id, display = displayHitShip) {
     this.hits += 1;
+    display(id);
   }
 
   isSunk() {

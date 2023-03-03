@@ -1,8 +1,8 @@
+import { clickHit } from './events';
+
 /* eslint-disable no-plusplus */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-loop-func */
-
-import { clickHit } from './events';
 
 function displayBoard(board, id) {
   let cells = '';
@@ -26,7 +26,13 @@ function displayShip(cell, id) {
 }
 
 function displayHit(id) {
-  document.querySelector(`#${id}`).classList.add('bg-black');
+  document.querySelector(`#${id}`).classList.add('bg-gray-500');
 }
 
-export { displayBoard, displayShip, displayHit };
+function displayHitShip(id) {
+  document.querySelector(`#${id}`).innerHTML = 'X';
+}
+
+export {
+  displayBoard, displayShip, displayHit, displayHitShip,
+};
