@@ -1,4 +1,4 @@
-import { displayShip } from './display';
+import { displayShip, displayHit } from './display';
 import { isValid } from './validate';
 
 /* eslint-disable no-plusplus */
@@ -17,12 +17,13 @@ export default class Board {
     });
   }
 
-  receiveAttack(cell) {
+  receiveAttack(cell, id, display = displayHit) {
     const target = this.at[cell];
 
     if (target.ship != null) target.ship.hit();
 
     target.hit = true;
+    display(`${id}-${cell}`);
   }
 
   noMoreShips() {

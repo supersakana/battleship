@@ -31,7 +31,8 @@ describe('placeShip', () => {
 describe('receiveAttack', () => {
   test('hits target if no ship', () => {
     const board = new Board();
-    board.receiveAttack('87');
+    const mockDisplay = jest.fn();
+    board.receiveAttack('87', 'human', mockDisplay);
 
     expect(board.at['87'].hit).toEqual(true);
   });
@@ -41,7 +42,7 @@ describe('receiveAttack', () => {
     const ship = new Ship(3);
     const mockDisplay = jest.fn();
     board.placeShip(ship, '40', 'human', mockDisplay);
-    board.receiveAttack('40');
+    board.receiveAttack('40', 'human', mockDisplay);
 
     expect(board.at['40'].ship.hits).toEqual(1);
     expect(board.at['40'].hit).toEqual(true);
@@ -54,9 +55,9 @@ describe('noMoreShips', () => {
     const ship = new Ship(3);
     const mockDisplay = jest.fn();
     board.placeShip(ship, '40', 'human', mockDisplay);
-    board.receiveAttack('40');
-    board.receiveAttack('41');
-    board.receiveAttack('42');
+    board.receiveAttack('40', 'human', mockDisplay);
+    board.receiveAttack('41', 'human', mockDisplay);
+    board.receiveAttack('42', 'human', mockDisplay);
 
     expect(board.noMoreShips()).toBeTruthy();
   });
@@ -75,7 +76,7 @@ describe('noMoreShips', () => {
     const ship = new Ship(3);
     const mockDisplay = jest.fn();
     board.placeShip(ship, '40', 'human', mockDisplay);
-    board.receiveAttack('40');
+    board.receiveAttack('40', 'human', mockDisplay);
 
     expect(board.noMoreShips()).toBeFalsy();
   });

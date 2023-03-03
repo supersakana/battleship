@@ -1,7 +1,7 @@
-function clickHit() {
-  document.querySelectorAll('.cell').forEach((cell) => {
+function clickHit(board, id) {
+  document.querySelectorAll(`.${id}-cell`).forEach((cell) => {
     cell.addEventListener('click', () => {
-      console.log(`im a cell here is my id: ${cell.id}`);
+      board.receiveAttack(cell.dataset.no, id);
     });
   });
 }
