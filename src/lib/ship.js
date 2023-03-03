@@ -1,5 +1,3 @@
-// import { displayHitShip } from './display';
-
 /* eslint-disable no-plusplus */
 /* eslint-disable radix */
 /* eslint-disable class-methods-use-this */
