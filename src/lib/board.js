@@ -39,6 +39,10 @@ export default class Board {
     return validCells;
   }
 
+  hitlessCells() {
+    return Object.keys(this.at).filter((cell) => this.at[cell].hit === false);
+  }
+
   //   private
 
   #generateCells() {

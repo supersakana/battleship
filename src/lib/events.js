@@ -1,6 +1,5 @@
 function cpuAttack(player) {
-  const hitless = Object.keys(player.board.at).filter((cell) => player.board.at[cell].hit === false); //eslint-disable-line
-  const random = hitless[Math.floor(((Math.random()) * hitless.length))];
+  const random = player.board.hitlessCells()[Math.floor(((Math.random()) * player.board.hitlessCells().length))]; //eslint-disable-line
   player.board.receiveAttack(random, 'human');
 }
 
