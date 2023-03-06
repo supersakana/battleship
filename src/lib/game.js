@@ -1,5 +1,6 @@
 import Player from './player';
 import { displayBoard } from './display';
+import { clickHit } from './events';
 
 /* eslint-disable class-methods-use-this */
 
@@ -19,6 +20,7 @@ export default class Game {
 
     displayBoard(human.board, 'human');
     displayBoard(cpu.board, 'cpu');
+    clickHit(cpu, 'cpu', human);
 
     human.randomize();
     cpu.randomize();
