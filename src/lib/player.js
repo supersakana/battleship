@@ -5,20 +5,18 @@ import Ship from './ship';
 /* eslint-disable no-param-reassign */
 
 export default class Player {
-  constructor(isCpu = false) {
-    this.isCpu = isCpu;
+  constructor(type = 'human') {
+    this.type = type;
     this.board = new Board();
     this.ships = this.#createShips();
   }
 
   randomize() {
-    const id = this.isCpu ? 'cpu' : 'human';
-
     this.ships.forEach((ship) => {
       ship.isVerti = this.#randomDirection();
       const coord = this.#randomCoord(ship);
 
-      this.board.placeShip(ship, coord, id);
+      this.board.placeShip(ship, coord, this.type);
     });
   }
 

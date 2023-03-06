@@ -15,11 +15,11 @@ export default class Game {
 
   setup() {
     const human = new Player();
-    const cpu = new Player(true);
+    const cpu = new Player('cpu');
     this.players.push(human, cpu);
 
-    displayBoard(human.board, 'human');
-    displayBoard(cpu.board, 'cpu');
+    displayBoard(human);
+    displayBoard(cpu);
     clickHit(cpu, 'cpu', human);
 
     human.randomize();

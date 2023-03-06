@@ -7,7 +7,7 @@ function clickHit(cpu, id, human) {
   document.querySelectorAll(`.${id}-cell`).forEach((cell) => {
     cell.addEventListener('click', () => {
       cpu.board.receiveAttack(cell.dataset.no, id);
-      setTimeout(cpuAttack, 1000, human);
+      setTimeout(cpuAttack, 500, human);
     });
   });
 }

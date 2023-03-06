@@ -2,16 +2,16 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-loop-func */
 
-function displayBoard(board, id) {
+function displayBoard(player) {
   let cells = '';
 
   for (let i = 0; i < 10; i++) {
-    const row = Object.keys(board.at).filter((key) => key[1] == i).sort();
+    const row = Object.keys(player.board.at).filter((key) => key[1] == i).sort();
     row.forEach((cell) => {
-      cells += `<div id="${id}-${cell}" data-no="${cell}" class="${id}-cell bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-xl hover:bg-gray-300"></div>`;
+      cells += `<div id="${player.type}-${cell}" data-no="${cell}" class="${player.type}-cell bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-xl hover:bg-gray-300"></div>`;
     });
   }
-  document.querySelector(`#${id}`).innerHTML = cells;
+  document.querySelector(`#${player.type}`).innerHTML = cells;
 }
 
 function displayShip(cell, id) {
