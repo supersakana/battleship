@@ -20,7 +20,7 @@ export default class Game {
 
     displayBoard(human);
     displayBoard(cpu);
-    clickHit(cpu, 'cpu', human);
+    clickHit(cpu, human);
 
     human.randomize();
     cpu.randomize();
