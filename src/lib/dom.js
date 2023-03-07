@@ -49,6 +49,8 @@ function cpuAttack(cpu, human) {
 function clickHit(cpu, human) {
   document.querySelectorAll(`.${cpu.type}-cell`).forEach((cell) => {
     cell.addEventListener('click', () => {
+      if (cpu.board.at[cell.dataset.no].hit) return;
+
       cpu.board.receiveAttack(cell.dataset.no, cpu.type);
       if (cpu.board.noMoreShips()) {
         displayWinner(human);
