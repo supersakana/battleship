@@ -22,4 +22,4 @@ function isValid(combo, ship, board) {
                              && isSameX(coord, ship, xAxis));
 }
 
-export { isValid }; // eslint-disable-line
+export { isValid, isWithinBoard };
