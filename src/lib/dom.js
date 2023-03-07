@@ -31,9 +31,19 @@ function displayHit(id, target) {
   cell.innerHTML = icon;
 }
 
-function cpuAttack(player) {
-  const coord = player.board.hitlessCells()[Math.floor(((Math.random()) * player.board.hitlessCells().length))]; //eslint-disable-line
-  player.board.receiveAttack(coord, player.type);
+function displayWinner(player) {
+  const message = player.type === 'cpu' ? 'CPU is the winner!' : 'You are the winner!';
+  const winner = document.querySelector('#winner');
+  winner.classList.remove('hidden');
+  winner.textContent = message;
+}
+
+function cpuAttack(cpu, human) {
+  const coord = human.board.hitlessCells()[Math.floor(((Math.random()) * human.board.hitlessCells().length))]; //eslint-disable-line
+  human.board.receiveAttack(coord, human.type);
+  if (human.board.noMoreShips()) {
+    displayWinner(cpu);
+  }
 }
 
 function clickHit(cpu, human) {
@@ -41,9 +51,9 @@ function clickHit(cpu, human) {
     cell.addEventListener('click', () => {
       cpu.board.receiveAttack(cell.dataset.no, cpu.type);
       if (cpu.board.noMoreShips()) {
-        console.log('Human is the winner');
+        displayWinner(human);
       } else {
-        setTimeout(cpuAttack, 500, human);
+        setTimeout(cpuAttack, 500, cpu, human);
       }
     });
   });
