@@ -9,6 +9,7 @@ export default class Player {
     this.type = type;
     this.board = new Board();
     this.ships = this.#createShips();
+    this.guesses = []; // for cpu only
   }
 
   randomize() {
@@ -18,6 +19,11 @@ export default class Player {
 
       this.board.placeShip(ship, coord, this.type);
     });
+  }
+
+  // for cpu only
+  makeGuess(coord) {
+    console.log(coord);
   }
 
   // private
