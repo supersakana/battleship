@@ -31,6 +31,20 @@ function displayHit(id, target) {
   cell.innerHTML = icon;
 }
 
+function cpuAttack(player) {
+  const coord = player.board.hitlessCells()[Math.floor(((Math.random()) * player.board.hitlessCells().length))]; //eslint-disable-line
+  player.board.receiveAttack(coord, player.type);
+}
+
+function clickHit(cpu, human) {
+  document.querySelectorAll(`.${cpu.type}-cell`).forEach((cell) => {
+    cell.addEventListener('click', () => {
+      cpu.board.receiveAttack(cell.dataset.no, cpu.type);
+      setTimeout(cpuAttack, 500, human);
+    });
+  });
+}
+
 export {
-  displayBoard, displayShip, displayHit,
+  displayBoard, displayShip, displayHit, clickHit,
 };

@@ -1,6 +1,5 @@
 import Player from './player';
-import { displayBoard } from './display';
-import { clickHit } from './events';
+import { displayBoard, clickHit } from './dom';
 
 /* eslint-disable class-methods-use-this */
 
