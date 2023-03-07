@@ -40,7 +40,11 @@ function clickHit(cpu, human) {
   document.querySelectorAll(`.${cpu.type}-cell`).forEach((cell) => {
     cell.addEventListener('click', () => {
       cpu.board.receiveAttack(cell.dataset.no, cpu.type);
-      setTimeout(cpuAttack, 500, human);
+      if (cpu.board.noMoreShips()) {
+        console.log('Human is the winner');
+      } else {
+        setTimeout(cpuAttack, 500, human);
+      }
     });
   });
 }
