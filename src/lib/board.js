@@ -1,5 +1,5 @@
 import { displayShip, displayHit } from './dom';
-import { isValid } from './validate';
+import { isValidPlacement } from './validate';
 
 /* eslint-disable no-plusplus */
 /* eslint-disable radix */
@@ -34,7 +34,7 @@ export default class Board {
   validCells(ship) {
     const validCells = this.#vaccantCells().filter((cell) => {
       const combo = ship.combo([cell]);
-      return isValid(combo, ship, this);
+      return isValidPlacement(combo, ship, this);
     });
     return validCells;
   }

@@ -14,7 +14,7 @@ function isVaccant(coord, board) {
 
 // public
 
-function isValid(combo, ship, board) {
+function isValidPlacement(combo, ship, board) {
   const xAxis = combo[0][0];
 
   return combo.every((coord) => isWithinBoard(coord)
@@ -22,4 +22,4 @@ function isValid(combo, ship, board) {
                              && isSameX(coord, ship, xAxis));
 }
 
-export { isValid, isWithinBoard };
+export { isValidPlacement, isWithinBoard };
