@@ -24,8 +24,8 @@ export default class Player {
     });
   }
 
-  // for cpu only
-  setGuesses(coord) {
+  // for cpu only, board is the foe's board
+  setGuesses(coord, board) {
     const shifts = [[0, -1], [1, 0], [0, 1], [-1, 0]];
     for (let i = 0; i < shifts.length; i++) {
       const guess = this.#createGuess(coord, shifts[i]);

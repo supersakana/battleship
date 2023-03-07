@@ -42,7 +42,7 @@ function cpuAttack(cpu, human) {
   const coord = human.board.hitlessCells()[Math.floor(((Math.random()) * human.board.hitlessCells().length))]; //eslint-disable-line
   human.board.receiveAttack(coord, human.type);
   if (human.board.noMoreShips()) displayWinner(cpu);
-  if (human.board.at[coord].ship != null) cpu.makeGuess(coord);
+  if (human.board.at[coord].ship != null) cpu.setGuesses(coord, human.board);
 }
 
 function clickHit(cpu, human) {
