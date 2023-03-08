@@ -8,7 +8,7 @@ function displayBoard(player) {
   for (let i = 0; i < 10; i++) {
     const row = Object.keys(player.board.at).filter((key) => key[1] == i).sort();
     row.forEach((cell) => {
-      cells += `<div id="${player.type}-${cell}" data-no="${cell}" class="${player.type}-cell bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-xl hover:bg-gray-300"></div>`;
+      cells += `<div id="${player.type}-${cell}" data-no="${cell}" class="${player.type}-cell bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-xl hover:bg-gray-300">${cell}</div>`;
     });
   }
   document.querySelector(`#${player.type}`).innerHTML = cells;
@@ -38,8 +38,18 @@ function displayWinner(player) {
   winner.textContent = message;
 }
 
+function cpuCoord(cpu, human) {
+  if (cpu.guesses.length === 0) {
+    return human.board.hitlessCells()[Math.floor(((Math.random()) * human.board.hitlessCells().length))]; //eslint-disable-line
+  }
+  const coord = cpu.guesses[Math.floor(((Math.random()) * cpu.guesses.length))];
+  cpu.guesses.splice(cpu.guesses.indexOf(coord), 1);
+  return coord;
+}
+
 function cpuAttack(cpu, human) {
-  const coord = human.board.hitlessCells()[Math.floor(((Math.random()) * human.board.hitlessCells().length))]; //eslint-disable-line
+  console.log(cpu.lastHit);
+  const coord = cpuCoord(cpu, human);
   human.board.receiveAttack(coord, human.type);
   if (human.board.noMoreShips()) displayWinner(cpu);
   if (human.board.at[coord].ship != null) cpu.setGuesses(coord, human.board);

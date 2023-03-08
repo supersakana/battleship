@@ -12,7 +12,9 @@ export default class Player {
     this.type = type;
     this.board = new Board();
     this.ships = this.#createShips();
-    this.guesses = []; // for cpu only
+    // below is cpu only...
+    this.guesses = [];
+    this.lastHit = null;
   }
 
   randomize() {
@@ -24,8 +26,9 @@ export default class Player {
     });
   }
 
-  // for cpu only, board is the foe's board
+  // for cpu only, board is the foe's board, only gets called when a ship hit is made
   setGuesses(coord, board) {
+    this.lastHit = coord;
     const shifts = [[0, -1], [1, 0], [0, 1], [-1, 0]];
     for (let i = 0; i < shifts.length; i++) {
       const guess = this.#createGuess(coord, shifts[i]);
@@ -47,6 +50,12 @@ export default class Player {
   #createGuess(coord, shift) {
     const xy = coord.split('').map((no) => parseInt(no));
     return `${xy[0] + shift[0]}${xy[1] + shift[1]}`;
+  }
+
+  #filterGuesses(coord) {
+    if (coord[1] === this.lastHit[1]) {
+      this.guesses = this.guesses.filter();
+    }
   }
 
   #randomDirection() {

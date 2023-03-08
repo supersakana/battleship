@@ -37,4 +37,19 @@ describe('setGuesses', () => {
 
     expect(cpu.guesses).toEqual(['24', '35', '26']);
   });
+
+  test('returns filtered guesses if hit pattern is vertical', () => {
+    const cpu = new Player('cpu');
+    const foeBoard = new Board();
+    const ship = new Ship(3);
+    const mockDisplay = jest.fn();
+    foeBoard.placeShip(ship, '14', 'human', mockDisplay);
+    foeBoard.receiveAttack('14', 'human', mockDisplay);
+    cpu.setGuesses('14', foeBoard);
+    foeBoard.receiveAttack('15', 'human', mockDisplay);
+    cpu.setGuesses('15', foeBoard);
+
+    expect(cpu.guesses).toEqual(['13', '16']);
+    expect(cpu.lastHit).toEqual('15');
+  });
 });
