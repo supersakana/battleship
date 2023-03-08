@@ -8,6 +8,9 @@ describe('setGuesses', () => {
   test('takes a coord of hit ship and returns array of coords to hit next', () => {
     const cpu = new Player('cpu');
     const foeBoard = new Board();
+    const ship = new Ship(3);
+    const mockDisplay = jest.fn();
+    foeBoard.placeShip(ship, '32', 'human', mockDisplay);
     cpu.setGuesses('32', foeBoard);
     expect(cpu.guesses).toEqual(['31', '42', '33', '22']);
   });
@@ -15,6 +18,9 @@ describe('setGuesses', () => {
   test('returns array of coords within board parameters', () => {
     const cpu = new Player('cpu');
     const foeBoard = new Board();
+    const ship = new Ship(3);
+    const mockDisplay = jest.fn();
+    foeBoard.placeShip(ship, '94', 'human', mockDisplay);
     cpu.setGuesses('94', foeBoard);
     expect(cpu.guesses).toEqual(['93', '95', '84']);
   });
@@ -22,6 +28,9 @@ describe('setGuesses', () => {
   test('returns array of coords within board parameters (corner)', () => {
     const cpu = new Player('cpu');
     const foeBoard = new Board();
+    const ship = new Ship(3);
+    const mockDisplay = jest.fn();
+    foeBoard.placeShip(ship, '00', 'human', mockDisplay);
     cpu.setGuesses('00', foeBoard);
     expect(cpu.guesses).toEqual(['10', '01']);
   });
@@ -69,5 +78,20 @@ describe('setGuesses', () => {
 
     expect(cpu.guesses).toEqual(['43', '73']);
     expect(cpu.lastHit).toEqual('63');
+  });
+
+  test('once a ship is sunk, the guesses and last hit are set to null', () => {
+    const cpu = new Player('cpu');
+    const foeBoard = new Board();
+    const ship = new Ship(2);
+    const mockDisplay = jest.fn();
+    foeBoard.placeShip(ship, '71', 'human', mockDisplay);
+    foeBoard.receiveAttack('71', 'human', mockDisplay);
+    foeBoard.receiveAttack('72', 'human', mockDisplay);
+    cpu.setGuesses('72', foeBoard);
+
+    expect(ship.isSunk).toBeTruthy();
+    expect(cpu.guesses).toEqual([]);
+    expect(cpu.lastHit).toEqual(null);
   });
 });

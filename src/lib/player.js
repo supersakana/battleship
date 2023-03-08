@@ -34,7 +34,11 @@ export default class Player {
       if (isValidGuess(guess, board)) this.guesses.push(guess);
     }
     if (this.lastHit != null) this.#filterGuesses(coord);
-    this.#setLastHit(coord);
+    this.lastHit = coord;
+    if (board.at[coord].ship.isSunk()) {
+      this.lastHit = null;
+      this.guesses = [];
+    }
   }
 
   // private
@@ -61,11 +65,6 @@ export default class Player {
     } else {
       this.guesses = this.guesses.filter((guess) => guess[1] === coord[1]);
     }
-  }
-
-  // cpu only (temporary)
-  #setLastHit(coord) {
-    this.lastHit = coord;
   }
 
   #randomDirection() {
