@@ -48,7 +48,6 @@ function cpuCoord(cpu, human) {
 }
 
 function cpuAttack(cpu, human) {
-  console.log(cpu.lastHit);
   const coord = cpuCoord(cpu, human);
   human.board.receiveAttack(coord, human.type);
   if (human.board.noMoreShips()) displayWinner(cpu);

@@ -47,9 +47,27 @@ describe('setGuesses', () => {
     foeBoard.receiveAttack('14', 'human', mockDisplay);
     cpu.setGuesses('14', foeBoard);
     foeBoard.receiveAttack('15', 'human', mockDisplay);
+    cpu.guesses.splice(cpu.guesses.indexOf('15'), 1); // temporary
     cpu.setGuesses('15', foeBoard);
 
     expect(cpu.guesses).toEqual(['13', '16']);
     expect(cpu.lastHit).toEqual('15');
+  });
+
+  test('returns filtered guesses if hit pattern is horizontal', () => {
+    const cpu = new Player('cpu');
+    const foeBoard = new Board();
+    const ship = new Ship(3);
+    ship.isVerti = false;
+    const mockDisplay = jest.fn();
+    foeBoard.placeShip(ship, '53', 'human', mockDisplay);
+    foeBoard.receiveAttack('53', 'human', mockDisplay);
+    cpu.setGuesses('53', foeBoard);
+    foeBoard.receiveAttack('63', 'human', mockDisplay);
+    cpu.guesses.splice(cpu.guesses.indexOf('63'), 1); // temporary
+    cpu.setGuesses('63', foeBoard);
+
+    expect(cpu.guesses).toEqual(['43', '73']);
+    expect(cpu.lastHit).toEqual('63');
   });
 });
