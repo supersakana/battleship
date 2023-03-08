@@ -8,10 +8,10 @@ function displayBoard(player) {
   for (let i = 0; i < 10; i++) {
     const row = Object.keys(player.board.at).filter((key) => key[1] == i).sort();
     row.forEach((cell) => {
-      cells += `<div id="${player.type}-${cell}" data-no="${cell}" class="${player.type}-cell bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-xl hover:bg-gray-300"></div>`;
+      cells += `<div id="${player.type()}-${cell}" data-no="${cell}" class="${player.type()}-cell bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-xl hover:bg-gray-300"></div>`;
     });
   }
-  document.querySelector(`#${player.type}`).innerHTML = cells;
+  document.querySelector(`#${player.type()}`).innerHTML = cells;
 }
 
 function displayShip(cell, id) {
@@ -32,12 +32,13 @@ function displayHit(id, target) {
 }
 
 function displayWinner(player) {
-  const message = player.type === 'cpu' ? 'CPU is the winner!' : 'You are the winner!';
+  const message = player.type() === 'cpu' ? 'CPU is the winner!' : 'You are the winner!';
   const winner = document.querySelector('#winner');
   winner.classList.remove('hidden');
   winner.textContent = message;
 }
 
+// move to CPU class
 function cpuCoord(cpu, human) {
   if (cpu.guesses.length === 0) {
     return human.board.hitlessCells()[Math.floor(((Math.random()) * human.board.hitlessCells().length))]; //eslint-disable-line
@@ -47,19 +48,20 @@ function cpuCoord(cpu, human) {
   return coord;
 }
 
+// move to CPU class
 function cpuAttack(cpu, human) {
   const coord = cpuCoord(cpu, human);
-  human.board.receiveAttack(coord, human.type);
+  human.board.receiveAttack(coord, human.type());
   if (human.board.noMoreShips()) displayWinner(cpu);
   if (human.board.at[coord].ship != null) cpu.setGuesses(coord, human.board);
 }
 
 function clickHit(cpu, human) {
-  document.querySelectorAll(`.${cpu.type}-cell`).forEach((cell) => {
+  document.querySelectorAll(`.${cpu.type()}-cell`).forEach((cell) => {
     cell.addEventListener('click', () => {
       if (cpu.board.at[cell.dataset.no].hit) return;
 
-      cpu.board.receiveAttack(cell.dataset.no, cpu.type);
+      cpu.board.receiveAttack(cell.dataset.no, cpu.type());
       if (cpu.board.noMoreShips()) {
         displayWinner(human);
       } else {

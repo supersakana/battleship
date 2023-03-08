@@ -10,7 +10,6 @@ export default class Cpu extends Player {
     super();
     this.guesses = [];
     this.lastHit = null;
-    this.type = 'cpu';
   }
 
   // foe's board, only gets called when a ship hit is made

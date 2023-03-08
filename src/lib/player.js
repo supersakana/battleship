@@ -5,8 +5,7 @@ import Ship from './ship';
 /* eslint-disable no-param-reassign */
 
 export default class Player {
-  constructor(type = 'player') {
-    this.type = type;
+  constructor() {
     this.board = new Board();
     this.ships = this.createShips();
   }
@@ -16,7 +15,7 @@ export default class Player {
       ship.isVerti = this.#randomDirection();
       const coord = this.#randomCoord(ship);
 
-      this.board.placeShip(ship, coord, this.type);
+      this.board.placeShip(ship, coord, this.type());
     });
   }
 
@@ -27,6 +26,10 @@ export default class Player {
       ships.push(new Ship(num));
     });
     return ships;
+  }
+
+  type() {
+    return this.constructor.name.toLowerCase();
   }
 
   // private
