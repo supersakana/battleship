@@ -1,6 +1,6 @@
 import Board from './board';
 import Ship from './ship';
-import { isWithinBoard } from './validate';
+import { isValidGuess } from './validate';
 
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-param-reassign */
@@ -29,7 +29,7 @@ export default class Player {
     const shifts = [[0, -1], [1, 0], [0, 1], [-1, 0]];
     for (let i = 0; i < shifts.length; i++) {
       const guess = this.#createGuess(coord, shifts[i]);
-      if (isWithinBoard(guess)) this.guesses.push(guess);
+      if (isValidGuess(guess, board)) this.guesses.push(guess);
     }
   }
 

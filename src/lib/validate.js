@@ -12,6 +12,10 @@ function isVaccant(coord, board) {
   return board.at[coord].ship === null;
 }
 
+function isNotHit(coord, board) {
+  return board.at[coord].hit === false;
+}
+
 // public
 
 function isValidPlacement(combo, ship, board) {
@@ -22,4 +26,8 @@ function isValidPlacement(combo, ship, board) {
                              && isSameX(coord, ship, xAxis));
 }
 
-export { isValidPlacement, isWithinBoard };
+function isValidGuess(coord, board) {
+  return isWithinBoard(coord) && isNotHit(coord, board);
+}
+
+export { isValidPlacement, isValidGuess };
