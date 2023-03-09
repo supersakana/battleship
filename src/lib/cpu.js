@@ -39,9 +39,9 @@ export default class Cpu extends Player {
 
   #coord(human) {
     if (this.guesses.length === 0) {
-      return human.board.hitlessCells()[Math.floor(((Math.random()) * human.board.hitlessCells().length))]; //eslint-disable-line
+      return this.sample(human.board.hitlessCells());
     }
-    const coord = this.guesses[Math.floor(((Math.random()) * this.guesses.length))];
+    const coord = this.sample(this.guesses);
     this.guesses.splice(this.guesses.indexOf(coord), 1);
     return coord;
   }

@@ -21,10 +21,7 @@ export default class Player {
 
   createShips(ships = []) {
     const lengths = [5, 4, 3, 3, 2];
-
-    lengths.forEach((num) => {
-      ships.push(new Ship(num));
-    });
+    lengths.forEach((num) => ships.push(new Ship(num)));
     return ships;
   }
 
@@ -32,14 +29,17 @@ export default class Player {
     return this.constructor.name.toLowerCase();
   }
 
+  sample(array) {
+    return array[Math.floor(((Math.random()) * array.length))];
+  }
+
   // private
 
   #randomDirection() {
-    return [true, false][Math.floor(((Math.random()) * 2))];
+    return this.sample([true, false]);
   }
 
   #randomCoord(ship) {
-    const coords = this.board.validCells(ship);
-    return coords[Math.floor(((Math.random()) * coords.length))];
+    return this.sample(this.board.validCells(ship));
   }
 }
