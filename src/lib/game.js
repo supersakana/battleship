@@ -6,37 +6,33 @@ import { displayBoard, displayWinner, clickHit } from './dom';
 
 export default class Game {
   constructor() {
-    this.players = [];
+    this.p1 = null;
+    this.p2 = null;
   }
 
   start() {
-    this.setup();// set up players and gameboards
+    this.setup();
   }
 
   setup() {
-    const human = new Player();
-    const cpu = new Cpu();
+    this.p1 = new Player();
+    this.p2 = new Cpu();
 
-    this.players.push(human, cpu);
-
-    displayBoard(human);
-    displayBoard(cpu);
+    displayBoard(this.p1);
+    displayBoard(this.p2);
     clickHit(this);
 
-    human.randomize();
-    cpu.randomize();
+    this.p1.randomize();
+    this.p2.randomize();
   }
 
   playRound(cell) {
-    const p1 = this.players[0];
-    const p2 = this.players[1];
-
-    p1.attack(p2, cell);
-    if (p2.board.noMoreShips()) {
-      displayWinner(p1);
+    this.p1.attack(this.p2, cell);
+    if (this.p2.board.noMoreShips()) {
+      displayWinner(this.p1);
     } else {
-      p2.attack(this.players[0]);
-      if (p1.board.noMoreShips()) displayWinner(p2);
+      this.p2.attack(this.p1);
+      if (this.p1.board.noMoreShips()) displayWinner(this.p2);
     }
   }
 }

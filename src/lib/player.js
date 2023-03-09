@@ -11,8 +11,6 @@ export default class Player {
   }
 
   attack(cpu, cell) {
-    if (cpu.board.at[cell.dataset.no].hit) return;
-
     cpu.board.receiveAttack(cell.dataset.no, cpu.type());
   }
 

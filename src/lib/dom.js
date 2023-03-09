@@ -4,11 +4,13 @@
 
 function displayBoard(player) {
   let cells = '';
+  let tw = `${player.type()}-cell bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-xl`;
+  if (player.type() === 'cpu') tw += ' hover:bg-gray-300';
 
   for (let i = 0; i < 10; i++) {
     const row = Object.keys(player.board.at).filter((key) => key[1] == i).sort();
     row.forEach((cell) => {
-      cells += `<div id="${player.type()}-${cell}" data-no="${cell}" class="${player.type()}-cell bg-white w-full h-full flex items-center justify-center cursor-pointer rounded-md shadow-xl hover:bg-gray-300"></div>`;
+      cells += `<div id="${player.type()}-${cell}" data-no="${cell}" class="${tw}"></div>`;
     });
   }
   document.querySelector(`#${player.type()}`).innerHTML = cells;
@@ -40,7 +42,11 @@ function displayWinner(player) {
 
 function clickHit(game) {
   document.querySelectorAll('.cpu-cell').forEach((cell) => {
-    cell.addEventListener('click', () => game.playRound(cell));
+    cell.addEventListener('click', () => {
+      if (game.p2.board.at[cell.dataset.no].hit) return;
+
+      game.playRound(cell);
+    });
   });
 }
 
