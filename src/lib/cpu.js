@@ -14,7 +14,7 @@ export default class Cpu extends Player {
   }
 
   attack(human) {
-    const coord = this.#coord(human);
+    const coord = this.#target(human);
     human.board.receiveAttack(coord, human.type());
     if (human.board.noMoreShips()) displayWinner(this);
     if (human.board.at[coord].ship != null) this.setGuesses(coord, human.board);
@@ -23,39 +23,38 @@ export default class Cpu extends Player {
   // foe's board, only gets called when a ship hit is made
   setGuesses(coord, board) {
     const shifts = [[0, -1], [1, 0], [0, 1], [-1, 0]];
-    for (let i = 0; i < shifts.length; i++) {
-      const guess = this.#createGuess(coord, shifts[i]);
-      if (isValidGuess(guess, board)) this.guesses.push(guess);
-    }
-    if (this.lastHit != null) this.#filterGuesses(coord);
-    this.lastHit = coord;
-    if (board.at[coord].ship.isSunk()) {
-      this.lastHit = null;
-      this.guesses = [];
-    }
+    shifts.forEach((shift) => this.#createGuess(coord, board, shift));
+    this.#evaluate(coord, board);
   }
 
   // private
 
-  #coord(human) {
-    if (this.guesses.length === 0) {
-      return this.sample(human.board.hitlessCells());
+  #evaluate(coord, board) {
+    if (this.lastHit != null) this.#filterGuesses(coord);
+    if (board.at[coord].ship.isSunk()) {
+      this.lastHit = null;
+      this.guesses = [];
+    } else {
+      this.lastHit = coord;
     }
+  }
+
+  #target(human) {
+    if (this.guesses.length === 0) return this.sample(human.board.hitlessCells());
+
     const coord = this.sample(this.guesses);
     this.guesses.splice(this.guesses.indexOf(coord), 1);
     return coord;
   }
 
-  #createGuess(coord, shift) {
+  #createGuess(coord, board, shift) {
     const xy = coord.split('').map((no) => parseInt(no));
-    return `${xy[0] + shift[0]}${xy[1] + shift[1]}`;
+    const guess = `${xy[0] + shift[0]}${xy[1] + shift[1]}`;
+    if (isValidGuess(guess, board)) this.guesses.push(guess);
   }
 
   #filterGuesses(coord) {
-    if (coord[0] === this.lastHit[0]) {
-      this.guesses = this.guesses.filter((guess) => guess[0] === coord[0]);
-    } else {
-      this.guesses = this.guesses.filter((guess) => guess[1] === coord[1]);
-    }
+    const i = coord[0] === this.lastHit[0] ? 0 : 1;
+    this.guesses = this.guesses.filter((guess) => guess[i] === coord[i]);
   }
 }
