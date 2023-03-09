@@ -1,4 +1,5 @@
 import { isValidGuess } from './validate';
+import { displayWinner } from './dom';
 import Player from './player';
 
 /* eslint-disable class-methods-use-this */
@@ -10,6 +11,13 @@ export default class Cpu extends Player {
     super();
     this.guesses = [];
     this.lastHit = null;
+  }
+
+  attack(human) {
+    const coord = this.#coord(human);
+    human.board.receiveAttack(coord, human.type());
+    if (human.board.noMoreShips()) displayWinner(this);
+    if (human.board.at[coord].ship != null) this.setGuesses(coord, human.board);
   }
 
   // foe's board, only gets called when a ship hit is made
@@ -28,6 +36,15 @@ export default class Cpu extends Player {
   }
 
   // private
+
+  #coord(human) {
+    if (this.guesses.length === 0) {
+      return human.board.hitlessCells()[Math.floor(((Math.random()) * human.board.hitlessCells().length))]; //eslint-disable-line
+    }
+    const coord = this.guesses[Math.floor(((Math.random()) * this.guesses.length))];
+    this.guesses.splice(this.guesses.indexOf(coord), 1);
+    return coord;
+  }
 
   #createGuess(coord, shift) {
     const xy = coord.split('').map((no) => parseInt(no));

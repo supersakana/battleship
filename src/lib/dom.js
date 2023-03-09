@@ -38,24 +38,6 @@ function displayWinner(player) {
   winner.textContent = message;
 }
 
-// move to CPU class
-function cpuCoord(cpu, human) {
-  if (cpu.guesses.length === 0) {
-    return human.board.hitlessCells()[Math.floor(((Math.random()) * human.board.hitlessCells().length))]; //eslint-disable-line
-  }
-  const coord = cpu.guesses[Math.floor(((Math.random()) * cpu.guesses.length))];
-  cpu.guesses.splice(cpu.guesses.indexOf(coord), 1);
-  return coord;
-}
-
-// move to CPU class
-function cpuAttack(cpu, human) {
-  const coord = cpuCoord(cpu, human);
-  human.board.receiveAttack(coord, human.type());
-  if (human.board.noMoreShips()) displayWinner(cpu);
-  if (human.board.at[coord].ship != null) cpu.setGuesses(coord, human.board);
-}
-
 function clickHit(cpu, human) {
   document.querySelectorAll(`.${cpu.type()}-cell`).forEach((cell) => {
     cell.addEventListener('click', () => {
@@ -65,12 +47,12 @@ function clickHit(cpu, human) {
       if (cpu.board.noMoreShips()) {
         displayWinner(human);
       } else {
-        setTimeout(cpuAttack, 500, cpu, human);
+        cpu.attack(human);
       }
     });
   });
 }
 
 export {
-  displayBoard, displayShip, displayHit, clickHit,
+  displayBoard, displayShip, displayHit, clickHit, displayWinner,
 };
