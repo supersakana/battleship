@@ -24,13 +24,23 @@ function displayShip(cell, id) {
   ship.classList.add(color);
 }
 
-function displayHit(id, target) {
-  const color = target.ship != null ? 'bg-none' : 'bg-none';
-  const icon = target.ship != null ? '<ion-icon class="absolute md:text-[1.7rem] text-orange-300" name="flame"></ion-icon>' : '<ion-icon class="absolute rotate-45 md:text-[2.3rem] text-gray-500" name="add"></ion-icon>';
-  const cell = document.querySelector(`#${id}`);
+function displayShipwreck(player, cell, board) {
+  const shipCells = Object.keys(board.at).filter((target) => board.at[target].ship === board.at[cell].ship); //eslint-disable-line
+  shipCells.forEach((target) => {
+    console.log(`${player}-${target}`);
+    document.querySelector(`#${player}-${target}`).innerHTML = '<ion-icon class="absolute md:text-[1.7rem] text-white" name="skull"></ion-icon>';
+  });
+}
 
-  cell.classList.add(color);
-  cell.innerHTML = icon;
+function displayHit(player, cell, board) {
+  const color = board.at[cell].ship != null ? 'bg-none' : 'bg-none';
+  const icon = board.at[cell].ship != null ? '<ion-icon class="absolute md:text-[1.7rem] text-orange-300" name="flame"></ion-icon>' : '<ion-icon class="absolute rotate-45 md:text-[2.3rem] text-gray-500" name="add"></ion-icon>';
+  const target = document.querySelector(`#${player}-${cell}`);
+
+  target.classList.add(color);
+  target.innerHTML = icon;
+
+  if (board.at[cell].ship != null && board.at[cell].ship.isSunk()) displayShipwreck(player, cell, board); // eslint-disable-line
 }
 
 function displayWinner(player) {
@@ -51,5 +61,5 @@ function clickHit(game) {
 }
 
 export {
-  displayBoard, displayShip, displayHit, clickHit, displayWinner,
+  displayBoard, displayShip, displayHit, clickHit, displayWinner, displayShipwreck,
 };

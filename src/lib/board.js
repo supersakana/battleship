@@ -17,13 +17,13 @@ export default class Board {
     });
   }
 
-  receiveAttack(cell, id, display = displayHit) {
+  receiveAttack(cell, player, display = displayHit) {
     const target = this.at[cell];
 
     if (target.ship != null) target.ship.hit();
 
     target.hit = true;
-    display(`${id}-${cell}`, target);
+    display(player, cell, this);
   }
 
   noMoreShips() {
