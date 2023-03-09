@@ -38,18 +38,9 @@ function displayWinner(player) {
   winner.textContent = message;
 }
 
-function clickHit(cpu, human) {
-  document.querySelectorAll(`.${cpu.type()}-cell`).forEach((cell) => {
-    cell.addEventListener('click', () => {
-      if (cpu.board.at[cell.dataset.no].hit) return;
-
-      cpu.board.receiveAttack(cell.dataset.no, cpu.type());
-      if (cpu.board.noMoreShips()) {
-        displayWinner(human);
-      } else {
-        cpu.attack(human);
-      }
-    });
+function clickHit(game) {
+  document.querySelectorAll('.cpu-cell').forEach((cell) => {
+    cell.addEventListener('click', () => game.playRound(cell));
   });
 }
 

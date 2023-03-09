@@ -1,6 +1,6 @@
 import Player from './player';
 import Cpu from './cpu';
-import { displayBoard, clickHit } from './dom';
+import { displayBoard, displayWinner, clickHit } from './dom';
 
 /* eslint-disable class-methods-use-this */
 
@@ -21,9 +21,22 @@ export default class Game {
 
     displayBoard(human);
     displayBoard(cpu);
-    clickHit(cpu, human);
+    clickHit(this);
 
     human.randomize();
     cpu.randomize();
+  }
+
+  playRound(cell) {
+    const p1 = this.players[0];
+    const p2 = this.players[1];
+
+    p1.attack(p2, cell);
+    if (p2.board.noMoreShips()) {
+      displayWinner(p1);
+    } else {
+      p2.attack(this.players[0]);
+      if (p1.board.noMoreShips()) displayWinner(p2);
+    }
   }
 }

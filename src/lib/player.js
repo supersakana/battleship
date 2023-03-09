@@ -10,6 +10,12 @@ export default class Player {
     this.ships = this.createShips();
   }
 
+  attack(cpu, cell) {
+    if (cpu.board.at[cell.dataset.no].hit) return;
+
+    cpu.board.receiveAttack(cell.dataset.no, cpu.type());
+  }
+
   randomize() {
     this.ships.forEach((ship) => {
       ship.isVerti = this.#randomDirection();

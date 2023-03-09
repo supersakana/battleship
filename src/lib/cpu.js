@@ -1,5 +1,4 @@
 import { isValidGuess } from './validate';
-import { displayWinner } from './dom';
 import Player from './player';
 
 /* eslint-disable class-methods-use-this */
@@ -16,11 +15,9 @@ export default class Cpu extends Player {
   attack(human) {
     const coord = this.#target(human);
     human.board.receiveAttack(coord, human.type());
-    if (human.board.noMoreShips()) displayWinner(this);
     if (human.board.at[coord].ship != null) this.setGuesses(coord, human.board);
   }
 
-  // foe's board, only gets called when a ship hit is made
   setGuesses(coord, board) {
     const shifts = [[0, -1], [1, 0], [0, 1], [-1, 0]];
     shifts.forEach((shift) => this.#createGuess(coord, board, shift));
