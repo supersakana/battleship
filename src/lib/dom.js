@@ -2,6 +2,7 @@ import { isValidPlacement, isWithinBoard, isSameX } from './validate';
 /* eslint-disable no-plusplus */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-loop-func */
+/* eslint-disable no-param-reassign */
 
 function displayBoard(player) {
   let cells = '';
@@ -62,6 +63,21 @@ function clickHit(game) {
   });
 }
 
+function clickRotate(player) {
+  const btn = document.querySelector('#rotate');
+  btn.addEventListener('click', () => {
+    if (btn.classList.contains('rotate-[-45deg]')) {
+      btn.classList.remove('rotate-[-45deg]');
+      btn.classList.add('rotate-45');
+      player.ships[0].isVerti = false;
+    } else {
+      btn.classList.remove('rotate-45');
+      btn.classList.add('rotate-[-45deg]');
+      player.ships[0].isVerti = true;
+    }
+  });
+}
+
 function displayPlacement(cell, ship, board) {
   const xAxis = cell.dataset.no[0];
   const combo = ship.combo([cell.dataset.no]);
@@ -74,8 +90,9 @@ function displayPlacement(cell, ship, board) {
 }
 
 function hidePlacement(cell, ship) {
+  const xAxis = cell.dataset.no[0];
   const combo = ship.combo([cell.dataset.no]);
-  combo.forEach((no) => {
+  combo.filter((no) => isWithinBoard(no) && isSameX(no, ship, xAxis)).forEach((no) => {
     const place = document.querySelector(`#player-${no}`);
     place.classList.remove('bg-green-400');
     place.classList.add('bg-white');
@@ -91,5 +108,12 @@ function hoverPlacement(player) {
 }
 
 export {
-  displayBoard, displayShip, displayHit, clickHit, displayWinner, displayShipwreck, hoverPlacement,
+  displayBoard,
+  displayShip,
+  displayHit,
+  clickHit,
+  displayWinner,
+  displayShipwreck,
+  hoverPlacement,
+  clickRotate,
 };
