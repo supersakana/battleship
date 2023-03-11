@@ -61,20 +61,28 @@ function clickHit(game) {
   });
 }
 
-function showShip(cell) {
-  cell.classList.remove('bg-white');
-  cell.classList.add('bg-rose-500');
+function displayPlacement(cell, ship) {
+  const combo = ship.combo([cell.dataset.no]);
+  combo.forEach((no) => {
+    const place = document.querySelector(`#player-${no}`);
+    place.classList.remove('bg-white');
+    place.classList.add('bg-rose-500');
+  });
 }
 
-function hideShip(cell) {
-  cell.classList.remove('bg-rose-500');
-  cell.classList.add('bg-white');
+function hidePlacement(cell, ship) {
+  const combo = ship.combo([cell.dataset.no]);
+  combo.forEach((no) => {
+    const place = document.querySelector(`#player-${no}`);
+    place.classList.remove('bg-rose-500');
+    place.classList.add('bg-white');
+  });
 }
 
-function hoverPlacement() {
+function hoverPlacement(player) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
-    cell.addEventListener('mouseenter', () => showShip(cell));
-    cell.addEventListener('mouseleave', () => hideShip(cell));
+    cell.addEventListener('mouseenter', () => displayPlacement(cell, player.ships[0]));
+    cell.addEventListener('mouseleave', () => hidePlacement(cell, player.ships[0]));
   });
 }
 
