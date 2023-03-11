@@ -13,7 +13,8 @@ function displayBoard(player) {
       cells += `<div id="${player.type()}-${cell}" data-no="${cell}" class="${tw}"></div>`;
     });
   }
-  document.querySelector(`#${player.type()}`).innerHTML = cells;
+  const board = document.querySelector(`#${player.type()}`);
+  board.innerHTML = cells;
 }
 
 function displayShip(cell, id) {
@@ -60,6 +61,23 @@ function clickHit(game) {
   });
 }
 
+function showShip(cell) {
+  cell.classList.remove('bg-white');
+  cell.classList.add('bg-rose-500');
+}
+
+function hideShip(cell) {
+  cell.classList.remove('bg-rose-500');
+  cell.classList.add('bg-white');
+}
+
+function hoverPlacement() {
+  document.querySelectorAll('.player-cell').forEach((cell) => {
+    cell.addEventListener('mouseenter', () => showShip(cell));
+    cell.addEventListener('mouseleave', () => hideShip(cell));
+  });
+}
+
 export {
-  displayBoard, displayShip, displayHit, clickHit, displayWinner, displayShipwreck,
+  displayBoard, displayShip, displayHit, clickHit, displayWinner, displayShipwreck, hoverPlacement,
 };
