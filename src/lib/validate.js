@@ -30,4 +30,6 @@ function isValidGuess(coord, board) {
   return isWithinBoard(coord) && isNotHit(coord, board);
 }
 
-export { isValidPlacement, isValidGuess };
+export {
+  isValidPlacement, isValidGuess, isWithinBoard, isSameX,
+};

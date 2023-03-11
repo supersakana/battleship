@@ -1,3 +1,4 @@
+import { isValidPlacement, isWithinBoard, isSameX } from './validate';
 /* eslint-disable no-plusplus */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-loop-func */
@@ -61,12 +62,14 @@ function clickHit(game) {
   });
 }
 
-function displayPlacement(cell, ship) {
+function displayPlacement(cell, ship, board) {
+  const xAxis = cell.dataset.no[0];
   const combo = ship.combo([cell.dataset.no]);
-  combo.forEach((no) => {
+  combo.filter((no) => isWithinBoard(no) && isSameX(no, ship, xAxis)).forEach((no) => {
     const place = document.querySelector(`#player-${no}`);
     place.classList.remove('bg-white');
-    place.classList.add('bg-rose-500');
+    place.classList.add('bg-green-400');
+    if (!isValidPlacement(combo, ship, board))place.innerHTML = '<ion-icon name="ban" class="absolute text-red-400 text-3xl"></ion-icon>';
   });
 }
 
@@ -74,14 +77,15 @@ function hidePlacement(cell, ship) {
   const combo = ship.combo([cell.dataset.no]);
   combo.forEach((no) => {
     const place = document.querySelector(`#player-${no}`);
-    place.classList.remove('bg-rose-500');
+    place.classList.remove('bg-green-400');
     place.classList.add('bg-white');
+    place.innerHTML = '';
   });
 }
 
 function hoverPlacement(player) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
-    cell.addEventListener('mouseenter', () => displayPlacement(cell, player.ships[0]));
+    cell.addEventListener('mouseenter', () => displayPlacement(cell, player.ships[0], player.board));
     cell.addEventListener('mouseleave', () => hidePlacement(cell, player.ships[0]));
   });
 }
