@@ -20,11 +20,12 @@ function displayBoard(player) {
 }
 
 function displayShip(cell, id) {
-  const color = id == 'player' ? 'bg-green-500' : 'bg-rose-500';
+  // const color = id == 'player' ? 'bg-blue-500' : 'bg-red-500';
   const ship = document.querySelector(`#${id}-${cell}`);
+  console.log(`#${id}-${cell}`);
 
   ship.classList.remove('bg-white');
-  ship.classList.add(color);
+  ship.classList.add('bg-blue-400');
 }
 
 function displayShipwreck(player, cell, board) {
@@ -85,7 +86,7 @@ function displayPlacement(cell, ship, board) {
     const place = document.querySelector(`#player-${no}`);
     place.classList.remove('bg-white');
     place.classList.add('bg-green-400');
-    if (!isValidPlacement(combo, ship, board))place.innerHTML = '<ion-icon name="ban" class="absolute text-red-400 text-3xl"></ion-icon>';
+    if (!isValidPlacement(combo, ship, board)) place.classList.add('bg-red-600');
   });
 }
 
@@ -95,6 +96,7 @@ function hidePlacement(cell, ship) {
   combo.filter((no) => isWithinBoard(no) && isSameX(no, ship, xAxis)).forEach((no) => {
     const place = document.querySelector(`#player-${no}`);
     place.classList.remove('bg-green-400');
+    place.classList.remove('bg-red-600');
     place.classList.add('bg-white');
     place.innerHTML = '';
   });
@@ -102,8 +104,19 @@ function hidePlacement(cell, ship) {
 
 function hoverPlacement(player) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
+    console.log(cell);
     cell.addEventListener('mouseenter', () => displayPlacement(cell, player.ships[0], player.board));
     cell.addEventListener('mouseleave', () => hidePlacement(cell, player.ships[0]));
+  });
+}
+
+function clickPlacement(player) {
+  document.querySelectorAll('.player-cell').forEach((cell) => {
+    cell.addEventListener('click', () => {
+      player.board.placeShip(player.ships[0], cell.dataset.no, player.type());
+      player.ships.shift();
+      console.log(player.ships);
+    });
   });
 }
 
@@ -116,4 +129,5 @@ export {
   displayShipwreck,
   hoverPlacement,
   clickRotate,
+  clickPlacement,
 };

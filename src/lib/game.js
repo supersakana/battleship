@@ -1,7 +1,7 @@
 import Player from './player';
 import Cpu from './cpu';
 import {
-  displayBoard, displayWinner, clickHit, clickRotate, hoverPlacement,
+  displayBoard, displayWinner, clickHit, clickRotate, hoverPlacement, clickPlacement,
 } from './dom';
 
 /* eslint-disable class-methods-use-this */
@@ -23,6 +23,7 @@ export default class Game {
     displayBoard(this.p1);
     hoverPlacement(this.p1);
     clickRotate(this.p1);
+    clickPlacement(this.p1);
 
     // displayBoard(this.p2);
     // clickHit(this);
