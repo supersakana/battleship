@@ -70,11 +70,11 @@ function clickRotate(player) {
     if (btn.classList.contains('rotate-[-45deg]')) {
       btn.classList.remove('rotate-[-45deg]');
       btn.classList.add('rotate-45');
-      player.ships[0].isVerti = false;
+      player.ships.forEach((ship) => { ship.isVerti = false; });
     } else {
       btn.classList.remove('rotate-45');
       btn.classList.add('rotate-[-45deg]');
-      player.ships[0].isVerti = true;
+      player.ships.forEach((ship) => { ship.isVerti = true; });
     }
   });
 }
