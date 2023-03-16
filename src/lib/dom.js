@@ -79,6 +79,8 @@ function clickRotate(player) {
 }
 
 function displayPlacement(cell, ship, board) {
+  if (ship === undefined) return;
+
   const xAxis = cell.dataset.no[0];
   const combo = ship.combo([cell.dataset.no]);
   combo.filter((no) => isWithinBoard(no) && isSameX(no, ship, xAxis)).forEach((no) => {
@@ -94,6 +96,8 @@ function displayPlacement(cell, ship, board) {
 }
 
 function hidePlacement(cell, ship, board) {
+  if (ship === undefined) return;
+
   const xAxis = cell.dataset.no[0];
   const combo = ship.combo([cell.dataset.no]);
   combo.filter((no) => isWithinBoard(no) && isSameX(no, ship, xAxis)).forEach((no) => {
@@ -118,6 +122,8 @@ function hoverPlacement(player) {
 function clickPlacement(player) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
     cell.addEventListener('click', () => {
+      if (player.ships.length === 0) return;
+
       player.board.placeShip(player.ships[0], cell.dataset.no, player.type());
       player.ships.shift();
     });
