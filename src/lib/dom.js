@@ -112,6 +112,11 @@ function hidePlacement(cell, ship, board) {
   });
 }
 
+function displayConfirm() {
+  const btn = document.querySelector('#finished');
+  btn.classList.remove('hidden');
+}
+
 function hoverPlacement(player) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
     cell.addEventListener('mouseenter', () => displayPlacement(cell, player.ships[0], player.board));
@@ -124,8 +129,10 @@ function clickPlacement(player) {
     cell.addEventListener('click', () => {
       const combo = player.ships[0].combo([cell.dataset.no]);
       if (player.ships.length === 0 || !isValidPlacement(combo, player.ships[0], player.board)) return; // eslint-disable-line
+
       player.board.placeShip(player.ships[0], cell.dataset.no, player.type());
       player.ships.shift();
+      if (player.ships.length === 0) displayConfirm();
     });
   });
 }
