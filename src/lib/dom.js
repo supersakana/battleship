@@ -112,9 +112,18 @@ function hidePlacement(cell, ship, board) {
   });
 }
 
-function displayConfirm() {
+function displayConfirm(game) {
   const btn = document.querySelector('#finished');
   btn.classList.remove('hidden');
+  btn.addEventListener('click', () => {
+    document.querySelector('#cpu-side').classList.remove('hidden');
+    document.querySelector('#player-text').classList.remove('hidden');
+    document.querySelector('#winner').classList.add('hidden');
+    document.querySelector('#buttons').classList.add('hidden');
+    displayBoard(game.p2);
+    game.p2.randomize();
+    clickHit(this);
+  });
 }
 
 function hoverPlacement(player) {
@@ -124,7 +133,7 @@ function hoverPlacement(player) {
   });
 }
 
-function clickPlacement(player) {
+function clickPlacement(player, game) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
     cell.addEventListener('click', () => {
       const combo = player.ships[0].combo([cell.dataset.no]);
@@ -132,7 +141,7 @@ function clickPlacement(player) {
 
       player.board.placeShip(player.ships[0], cell.dataset.no, player.type());
       player.ships.shift();
-      if (player.ships.length === 0) displayConfirm();
+      if (player.ships.length === 0) displayConfirm(game);
     });
   });
 }

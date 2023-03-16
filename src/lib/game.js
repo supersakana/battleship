@@ -23,7 +23,7 @@ export default class Game {
     displayBoard(this.p1);
     hoverPlacement(this.p1);
     clickRotate(this.p1);
-    clickPlacement(this.p1);
+    clickPlacement(this.p1, this);
 
     // displayBoard(this.p2);
     // clickHit(this);
