@@ -22,16 +22,15 @@ function displayBoard(player) {
 function displayShip(cell, id) {
   // const color = id == 'player' ? 'bg-blue-500' : 'bg-red-500';
   const ship = document.querySelector(`#${id}-${cell}`);
-  console.log(`#${id}-${cell}`);
 
   ship.classList.remove('bg-white');
-  ship.classList.add('bg-blue-400');
+  ship.classList.remove('bg-green-400');
+  ship.classList.add('bg-blue-300');
 }
 
 function displayShipwreck(player, cell, board) {
   const shipCells = Object.keys(board.at).filter((target) => board.at[target].ship === board.at[cell].ship); //eslint-disable-line
   shipCells.forEach((target) => {
-    console.log(`${player}-${target}`);
     document.querySelector(`#${player}-${target}`).innerHTML = '<ion-icon class="absolute md:text-[1.7rem] text-white" name="skull"></ion-icon>';
   });
 }
@@ -86,27 +85,33 @@ function displayPlacement(cell, ship, board) {
     const place = document.querySelector(`#player-${no}`);
     place.classList.remove('bg-white');
     place.classList.add('bg-green-400');
-    if (!isValidPlacement(combo, ship, board)) place.classList.add('bg-red-600');
+    if (!isValidPlacement(combo, ship, board)) {
+      place.classList.remove('bg-green-300');
+      place.classList.remove('bg-blue-300');
+      place.classList.add('bg-red-600');
+    }
   });
 }
 
-function hidePlacement(cell, ship) {
+function hidePlacement(cell, ship, board) {
   const xAxis = cell.dataset.no[0];
   const combo = ship.combo([cell.dataset.no]);
   combo.filter((no) => isWithinBoard(no) && isSameX(no, ship, xAxis)).forEach((no) => {
     const place = document.querySelector(`#player-${no}`);
     place.classList.remove('bg-green-400');
     place.classList.remove('bg-red-600');
-    place.classList.add('bg-white');
-    place.innerHTML = '';
+    if (board.at[no].ship != null) {
+      place.classList.add('bg-blue-300');
+    } else {
+      place.classList.add('bg-white');
+    }
   });
 }
 
 function hoverPlacement(player) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
-    console.log(cell);
     cell.addEventListener('mouseenter', () => displayPlacement(cell, player.ships[0], player.board));
-    cell.addEventListener('mouseleave', () => hidePlacement(cell, player.ships[0]));
+    cell.addEventListener('mouseleave', () => hidePlacement(cell, player.ships[0], player.board));
   });
 }
 
@@ -115,7 +120,6 @@ function clickPlacement(player) {
     cell.addEventListener('click', () => {
       player.board.placeShip(player.ships[0], cell.dataset.no, player.type());
       player.ships.shift();
-      console.log(player.ships);
     });
   });
 }
