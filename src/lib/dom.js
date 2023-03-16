@@ -122,8 +122,8 @@ function hoverPlacement(player) {
 function clickPlacement(player) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
     cell.addEventListener('click', () => {
-      if (player.ships.length === 0) return;
-
+      const combo = player.ships[0].combo([cell.dataset.no]);
+      if (player.ships.length === 0 || !isValidPlacement(combo, player.ships[0], player.board)) return; // eslint-disable-line
       player.board.placeShip(player.ships[0], cell.dataset.no, player.type());
       player.ships.shift();
     });
