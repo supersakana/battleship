@@ -78,29 +78,33 @@ function clickRotate(player) {
   });
 }
 
+function resetBoard(player) {
+  player.ships = player.createShips();
+  player.board.reset();
+  document.querySelector('#finished').classList.add('hidden');
+  document.querySelectorAll('.player-cell').forEach((cell) => {
+    cell.classList.remove('bg-green-400');
+    cell.classList.add('bg-white');
+
+    const rotate = document.querySelector('#rotate');
+    rotate.classList.add('rotate-[-45deg]');
+    rotate.classList.remove('rotate-45');
+  });
+}
+
 function clickRandomize(player) {
   const btn = document.querySelector('#randomize');
   btn.addEventListener('click', () => {
-    console.log(player);
+    resetBoard(player);
+    player.randomize();
+    document.querySelector('#finished').classList.remove('hidden');
+    player.ships = [];
   });
 }
 
 function clickTrash(player) {
   const btn = document.querySelector('#trash');
-
-  btn.addEventListener('click', () => {
-    player.ships = player.createShips();
-    player.board.reset();
-    document.querySelector('#finished').classList.add('hidden');
-    document.querySelectorAll('.player-cell').forEach((cell) => {
-      cell.classList.remove('bg-green-400');
-      cell.classList.add('bg-white');
-
-      const rotate = document.querySelector('#rotate');
-      rotate.classList.add('rotate-[-45deg]');
-      rotate.classList.remove('rotate-45');
-    });
-  });
+  btn.addEventListener('click', () => resetBoard(player));
 }
 
 function displayPlacement(cell, ship, board) {
