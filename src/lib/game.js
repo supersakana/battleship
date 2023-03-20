@@ -1,7 +1,7 @@
 import Player from './player';
 import Cpu from './cpu';
 import {
-  displayBoard, displayWinner, clickHit, clickRotate, hoverPlacement, clickPlacement,
+  displayBoard, displayWinner, clickRotate, hoverPlacement, clickPlacement,
 } from './dom';
 
 /* eslint-disable class-methods-use-this */

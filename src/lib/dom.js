@@ -20,12 +20,12 @@ function displayBoard(player) {
 }
 
 function displayShip(cell, id) {
-  // const color = id == 'player' ? 'bg-blue-500' : 'bg-red-500';
+  const color = id == 'player' ? 'bg-green-400' : 'bg-red-400';
   const ship = document.querySelector(`#${id}-${cell}`);
 
   ship.classList.remove('bg-white');
-  ship.classList.remove('bg-green-400');
-  ship.classList.add('bg-blue-300');
+  ship.classList.remove('bg-green-300');
+  ship.classList.add(color);
 }
 
 function displayShipwreck(player, cell, board) {
@@ -86,10 +86,10 @@ function displayPlacement(cell, ship, board) {
   combo.filter((no) => isWithinBoard(no) && isSameX(no, ship, xAxis)).forEach((no) => {
     const place = document.querySelector(`#player-${no}`);
     place.classList.remove('bg-white');
-    place.classList.add('bg-green-400');
+    place.classList.add('bg-green-300');
     if (!isValidPlacement(combo, ship, board)) {
       place.classList.remove('bg-green-300');
-      place.classList.remove('bg-blue-300');
+      place.classList.remove('bg-green-400');
       place.classList.add('bg-red-600');
     }
   });
@@ -102,10 +102,10 @@ function hidePlacement(cell, ship, board) {
   const combo = ship.combo([cell.dataset.no]);
   combo.filter((no) => isWithinBoard(no) && isSameX(no, ship, xAxis)).forEach((no) => {
     const place = document.querySelector(`#player-${no}`);
-    place.classList.remove('bg-green-400');
+    place.classList.remove('bg-green-300');
     place.classList.remove('bg-red-600');
     if (board.at[no].ship != null) {
-      place.classList.add('bg-blue-300');
+      place.classList.add('bg-green-400');
     } else {
       place.classList.add('bg-white');
     }
@@ -122,8 +122,18 @@ function displayConfirm(game) {
     document.querySelector('#buttons').classList.add('hidden');
     displayBoard(game.p2);
     game.p2.randomize();
-    clickHit(this);
+    clickHit(game);
   });
+}
+
+function makePlacement(cell, player, game) {
+  if (!document.querySelector('#cpu-side').classList.contains('hidden')) return;
+  const combo = player.ships[0].combo([cell.dataset.no]);
+      if (player.ships.length === 0 || !isValidPlacement(combo, player.ships[0], player.board)) return; // eslint-disable-line
+
+  player.board.placeShip(player.ships[0], cell.dataset.no, player.type());
+  player.ships.shift();
+  if (player.ships.length === 0) displayConfirm(game);
 }
 
 function hoverPlacement(player) {
@@ -135,14 +145,7 @@ function hoverPlacement(player) {
 
 function clickPlacement(player, game) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
-    cell.addEventListener('click', () => {
-      const combo = player.ships[0].combo([cell.dataset.no]);
-      if (player.ships.length === 0 || !isValidPlacement(combo, player.ships[0], player.board)) return; // eslint-disable-line
-
-      player.board.placeShip(player.ships[0], cell.dataset.no, player.type());
-      player.ships.shift();
-      if (player.ships.length === 0) displayConfirm(game);
-    });
+    cell.addEventListener('click', () => makePlacement(cell, player, game));
   });
 }
 
