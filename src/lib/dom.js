@@ -78,6 +78,26 @@ function clickRotate(player) {
   });
 }
 
+function clickRandomize(player) {
+  const btn = document.querySelector('#randomize');
+  btn.addEventListener('click', () => {
+    console.log(player);
+  });
+}
+
+function clickTrash(player) {
+  const btn = document.querySelector('#trash');
+  btn.addEventListener('click', () => {
+    player.ships = player.createShips();
+    player.board.reset();
+    document.querySelector('#finished').classList.add('hidden');
+    document.querySelectorAll('.player-cell').forEach((cell) => {
+      cell.classList.remove('bg-green-400');
+      cell.classList.add('bg-white');
+    });
+  });
+}
+
 function displayPlacement(cell, ship, board) {
   if (ship === undefined) return;
 
@@ -112,9 +132,8 @@ function hidePlacement(cell, ship, board) {
   });
 }
 
-function displayConfirm(game) {
+function clickConfirm(game) {
   const btn = document.querySelector('#finished');
-  btn.classList.remove('hidden');
   btn.addEventListener('click', () => {
     document.querySelector('#cpu-side').classList.remove('hidden');
     document.querySelector('#player-text').classList.remove('hidden');
@@ -126,14 +145,14 @@ function displayConfirm(game) {
   });
 }
 
-function makePlacement(cell, player, game) {
+function makePlacement(cell, player) {
   if (!document.querySelector('#cpu-side').classList.contains('hidden')) return;
   const combo = player.ships[0].combo([cell.dataset.no]);
       if (player.ships.length === 0 || !isValidPlacement(combo, player.ships[0], player.board)) return; // eslint-disable-line
 
   player.board.placeShip(player.ships[0], cell.dataset.no, player.type());
   player.ships.shift();
-  if (player.ships.length === 0) displayConfirm(game);
+  if (player.ships.length === 0) document.querySelector('#finished').classList.remove('hidden');
 }
 
 function hoverPlacement(player) {
@@ -159,4 +178,7 @@ export {
   hoverPlacement,
   clickRotate,
   clickPlacement,
+  clickRandomize,
+  clickTrash,
+  clickConfirm,
 };

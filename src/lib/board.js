@@ -43,6 +43,12 @@ export default class Board {
     return Object.keys(this.at).filter((cell) => this.at[cell].hit === false);
   }
 
+  reset() {
+    Object.keys(this.at).forEach((no) => {
+      this.at[no].ship = null;
+    });
+  }
+
   //   private
 
   #generateCells() {
