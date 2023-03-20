@@ -1,7 +1,7 @@
 import Player from './player';
 import Cpu from './cpu';
 import {
-  displayBoard, displayWinner, clickRotate, hoverPlacement, clickPlacement, clickRandomize, clickTrash, clickConfirm,
+  displayBoard, displayWinner, enableEvents,
 } from './dom';
 
 /* eslint-disable class-methods-use-this */
@@ -21,12 +21,7 @@ export default class Game {
     this.p2 = new Cpu();
 
     displayBoard(this.p1);
-    hoverPlacement(this.p1);
-    clickRotate(this.p1);
-    clickRandomize(this.p1);
-    clickTrash(this.p1);
-    clickConfirm(this);
-    clickPlacement(this.p1, this);
+    enableEvents(this);
   }
 
   playRound(cell) {

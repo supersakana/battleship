@@ -87,6 +87,7 @@ function clickRandomize(player) {
 
 function clickTrash(player) {
   const btn = document.querySelector('#trash');
+
   btn.addEventListener('click', () => {
     player.ships = player.createShips();
     player.board.reset();
@@ -94,6 +95,10 @@ function clickTrash(player) {
     document.querySelectorAll('.player-cell').forEach((cell) => {
       cell.classList.remove('bg-green-400');
       cell.classList.add('bg-white');
+
+      const rotate = document.querySelector('#rotate');
+      rotate.classList.add('rotate-[-45deg]');
+      rotate.classList.remove('rotate-45');
     });
   });
 }
@@ -162,10 +167,19 @@ function hoverPlacement(player) {
   });
 }
 
-function clickPlacement(player, game) {
+function clickPlacement(player) {
   document.querySelectorAll('.player-cell').forEach((cell) => {
-    cell.addEventListener('click', () => makePlacement(cell, player, game));
+    cell.addEventListener('click', () => makePlacement(cell, player));
   });
+}
+
+function enableEvents(game) {
+  hoverPlacement(game.p1);
+  clickRotate(game.p1);
+  clickRandomize(game.p1);
+  clickTrash(game.p1);
+  clickConfirm(game);
+  clickPlacement(game.p1);
 }
 
 export {
@@ -175,10 +189,5 @@ export {
   clickHit,
   displayWinner,
   displayShipwreck,
-  hoverPlacement,
-  clickRotate,
-  clickPlacement,
-  clickRandomize,
-  clickTrash,
-  clickConfirm,
+  enableEvents,
 };
