@@ -1,7 +1,17 @@
 import { displayBoard, enableEvents } from './dom';
 
-function mainPage(game) {
+function mainPage() {
   document.querySelector('#content').innerHTML = `
+      <div class="flex items-center justify-center gap-x-1 mb-5">
+        <h1 class="text-5xl md:text-7xl">Battleship</h1>
+        <ion-icon class="text-5xl md:text-7xl text-blue-500" name="boat-outline"></ion-icon>        
+      </div>
+
+      <div id="difficulty" class="flex items-center justify-center gap-x-2 text-xl md:text-2xl text-white">
+        <button id="easy" class="difficulty bg-green-500 hover:bg-green-400 rounded-lg px-4 md:px-5 py-1">Easy</button>
+        <button id="medium" class="difficulty bg-yellow-500 hover:bg-yellow-400 rounded-lg px-1 md:px-2 py-1">Medium</button>
+        <button id="hard" class="difficulty bg-red-500 hover:bg-red-400 rounded-lg px-4 md:px-5 py-1">Hard</button>
+      </div>
       `;
 }
 
