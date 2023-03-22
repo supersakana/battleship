@@ -1,7 +1,7 @@
 import Player from './player';
 import Cpu from './cpu';
 import { displayWinner } from './dom';
-import { mainPage, setupPage } from './pages';
+import { mainPage } from './pages';
 
 /* eslint-disable class-methods-use-this */
 
@@ -18,8 +18,7 @@ export default class Game {
   setup() {
     this.p1 = new Player();
     this.p2 = new Cpu();
-    mainPage();
-    // setupPage(this);
+    mainPage(this);
   }
 
   playRound(cell) {
